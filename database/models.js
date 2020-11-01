@@ -26,17 +26,20 @@ module.exports = {
     return db.query(`SELECT * FROM people;`);
   },
   getEmailAndIdByName: (name) => {
-    return db.query(`SELECT mail.id, mail.email WHERE mail.name = '${name}`);
+    return db.query(`SELECT mail.id, mail.email WHERE mail.name = '${name};`);
   },
   getPhoneNumberAndIdByName: (name) => {
     return db.query(
-      `SELECT phone.id, phone.number WHERE phone.name = '${name}`
+      `SELECT phone.id, phone.number WHERE phone.name = '${name};`
     );
   },
   getAddressAndIdByName: (name) => {
     return db.query(
-      `SELECT addresses.id, addresses.address WHERE addresses.name = '${name}`
+      `SELECT addresses.id, addresses.address WHERE addresses.name = '${name};`
     );
+  },
+  addName: (name) => {
+    return db.query(`INSERT INTO people (name) VALUES ('${name}');`);
   },
   addEmailByName: (name, email) => {
     return db.query(

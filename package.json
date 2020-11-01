@@ -11,6 +11,7 @@
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "pg": "^8.4.2",
     "react": "^17.0.1",
@@ -24,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "seed": "node database/seed.js"
+    "seed": "node database/seed.js",
+    "backend": "nodemon server/index.js"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

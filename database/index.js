@@ -19,7 +19,7 @@ db.connect((err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log("DATABASE: Connected! \n".green);
+    console.log("\n DATABASE: Connected! \n".blue);
   }
 });
 
