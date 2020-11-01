@@ -33,17 +33,25 @@ app.get("/get_all_names", (req, res) => {
 // getAddressAndIdByName
 
 app.post("/add_name", (req, res) => {
-  //   console.log(req.body.name);
   const name = req.body.name;
   db.addName(name)
     .then((data) => {
-      //   console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => res.status(400).send(err));
 });
 
-// addEmailByName
+app.post("/add_email_by_name", (req, res) => {
+  console.log(req.body);
+  const name = req.body.name;
+  const email = req.body.email;
+  db.addEmailByName(name, email)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
 // addPhoneNumberByName
 // addAddressByName
 
@@ -56,38 +64,12 @@ app.post("/add_name", (req, res) => {
 // deleteAddressById
 // deleteContactByName
 
-// app.post("/search", (req, res) => {
-//   const name = req.body.text;
-//   db.searchString(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.post("/id", (req, res) => {
-//   const id = req.body.id;
-//   db.searchId(id)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.post("/search_related", (req, res) => {
-//   const name = req.body.text;
-//   // console.log('should log what is typed', name)
-//   db.searchRelated(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.get("/get_items", (req, res) => {
-//   db.getAllItems()
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
+// deletes an entire contact (including name/email/addy/phone#)
+app.post("/delete_contact_by_name", (req, res) => {
+  const name = req.body.name;
+  db.deleteContactByName(name)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => res.status(400).send(err));
+});

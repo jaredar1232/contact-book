@@ -43,17 +43,17 @@ module.exports = {
   },
   addEmailByName: (name, email) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES (${name}, ${email});`
+      `INSERT INTO mail (name, email) VALUES ('${name}', '${email}');`
     );
   },
   addPhoneNumberByName: (name, number) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES (${name}, ${number});`
+      `INSERT INTO mail (name, email) VALUES ('${name}', '${number}');`
     );
   },
   addAddressByName: (name, address) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES (${name}, ${address});`
+      `INSERT INTO mail (name, email) VALUES ('${name}', '${address}');`
     );
   },
   updateEmailById: (id, email) => {
@@ -79,7 +79,7 @@ module.exports = {
     return db.query(`DELETE FROM addresses WHERE addresses.id = '${id};`);
   },
   deleteContactByName: (name) => {
-    return db.query(`DELETE FROM person WHERE person.name = '${name};`);
+    return db.query(`DELETE FROM people WHERE people.name = '${name}';`);
   },
 };
 
