@@ -26,16 +26,18 @@ module.exports = {
     return db.query(`SELECT * FROM people;`);
   },
   getEmailAndIdByName: (name) => {
-    return db.query(`SELECT mail.id, mail.email WHERE mail.name = '${name};`);
+    return db.query(
+      `SELECT mail.id, mail.email FROM mail WHERE mail.name = '${name}';`
+    );
   },
   getPhoneNumberAndIdByName: (name) => {
     return db.query(
-      `SELECT phone.id, phone.number WHERE phone.name = '${name};`
+      `SELECT phone.id, phone.number FROM phone WHERE phone.name = '${name}';`
     );
   },
   getAddressAndIdByName: (name) => {
     return db.query(
-      `SELECT addresses.id, addresses.address WHERE addresses.name = '${name};`
+      `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
     );
   },
   addName: (name) => {
@@ -48,12 +50,12 @@ module.exports = {
   },
   addPhoneNumberByName: (name, number) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES ('${name}', '${number}');`
+      `INSERT INTO phone (name, number) VALUES ('${name}', '${number}');`
     );
   },
   addAddressByName: (name, address) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES ('${name}', '${address}');`
+      `INSERT INTO addresses (name, address) VALUES ('${name}', '${address}');`
     );
   },
   updateEmailById: (id, email) => {
@@ -70,13 +72,13 @@ module.exports = {
     );
   },
   deleteEmailById: (id) => {
-    return db.query(`DELETE FROM mail WHERE mail.id = '${id};`);
+    return db.query(`DELETE FROM mail WHERE mail.id = '${id}';`);
   },
   deletePhoneNumberById: (id) => {
-    return db.query(`DELETE FROM phone WHERE phone.id = '${id};`);
+    return db.query(`DELETE FROM phone WHERE phone.id = '${id}';`);
   },
   deleteAddressById: (id) => {
-    return db.query(`DELETE FROM addresses WHERE addresses.id = '${id};`);
+    return db.query(`DELETE FROM addresses WHERE addresses.id = '${id}';`);
   },
   deleteContactByName: (name) => {
     return db.query(`DELETE FROM people WHERE people.name = '${name}';`);
@@ -86,18 +88,18 @@ module.exports = {
 // Original querry idea, this will present an issue when modifying specific numbers/emails/addresses.
 // I will instead break into individual querries
 //
-//   getInfoByName: (name) => {
-//     return db.query(
-//       `SELECT
-//         name, address, email, number
-//       FROM
-//         people
-//       INNER JOIN
-//         mail ON mail.name = people.name
-//       INNER JOIN
-//         phone ON phone.name = people.name
-//       INNER JOIN
-//         addresses ON addresses.name = people.name
-//       WHERE people.name = '${name}'`
-//     );
-//   },
+// getInfoByName: (name) => {
+//   return db.query(
+//     `SELECT
+//       name, address, email, number
+//     FROM
+//       people
+//     INNER JOIN
+//       mail ON mail.name = people.name
+//     INNER JOIN
+//       phone ON phone.name = people.name
+//     INNER JOIN
+//       addresses ON addresses.name = people.name
+//     WHERE people.name = '${name}'`
+//   );
+// },

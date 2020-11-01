@@ -17,7 +17,7 @@ app.listen(port, () => {
 });
 
 ////////////////////////////////////////////////////////
-// POSTGRES
+// GET ROUTES
 ////////////////////////////////////////////////////////
 
 app.get("/get_all_names", (req, res) => {
@@ -28,41 +28,142 @@ app.get("/get_all_names", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-// getEmailAndIdByName
-// getPhoneNumberAndIdByName
-// getAddressAndIdByName
+app.get("/get_email_and_id_by_name", (req, res) => {
+  const name = req.body.name;
+  db.getEmailAndIdByName(name)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.get("/get_phone_number_and_id_by_name", (req, res) => {
+  const name = req.body.name;
+  db.getPhoneNumberAndIdByName(name)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.get("/get_address_and_id_by_name", (req, res) => {
+  const name = req.body.name;
+  db.getAddressAndIdByName(name)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+////////////////////////////////////////////////////////
+// ADD ROUTES
+////////////////////////////////////////////////////////
 
 app.post("/add_name", (req, res) => {
   const name = req.body.name;
   db.addName(name)
     .then((data) => {
-      res.status(200).send(data);
+      res.status(200).send("Name added!");
     })
     .catch((err) => res.status(400).send(err));
 });
 
 app.post("/add_email_by_name", (req, res) => {
-  console.log(req.body);
   const name = req.body.name;
   const email = req.body.email;
   db.addEmailByName(name, email)
     .then((data) => {
-      res.status(200).send(data);
+      res.status(200).send("Email added!");
     })
     .catch((err) => res.status(400).send(err));
 });
 
-// addPhoneNumberByName
-// addAddressByName
+app.post("/add_phone_number_by_name", (req, res) => {
+  const name = req.body.name;
+  const number = req.body.number;
+  db.addPhoneNumberByName(name, number)
+    .then((data) => {
+      res.status(200).send("Phone number added!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
 
-// updateEmailById
-// updatePhoneNumberById
-// updateAddressById
+app.post("/add_address_by_name", (req, res) => {
+  const name = req.body.name;
+  const address = req.body.address;
+  db.addAddressByName(name, address)
+    .then((data) => {
+      res.status(200).send("Address added!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
 
-// deleteEmailById
-// deletePhoneNumberById
-// deleteAddressById
-// deleteContactByName
+////////////////////////////////////////////////////////
+// UPDATE ROUTES
+////////////////////////////////////////////////////////
+
+app.post("/update_email_by_id", (req, res) => {
+  const id = req.body.id;
+  const email = req.body.email;
+  db.updateEmailById(id, email)
+    .then((data) => {
+      res.status(200).send("Email updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.post("/update_phone_number_by_id", (req, res) => {
+  const id = req.body.id;
+  const number = req.body.number;
+  db.updatePhoneNumberById(id, number)
+    .then((data) => {
+      res.status(200).send("Phone number updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.post("/update_address_by_id", (req, res) => {
+  const id = req.body.id;
+  const address = req.body.address;
+  db.updateAddressById(id, address)
+    .then((data) => {
+      res.status(200).send("Address updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+////////////////////////////////////////////////////////
+// DELETE ROUTES
+////////////////////////////////////////////////////////
+app.post("/delete_email_by_id", (req, res) => {
+  const id = req.body.id;
+  const email = req.body.email;
+  db.deleteEmailById(id, email)
+    .then((data) => {
+      res.status(200).send("Email updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.post("/update_phone_number_by_id", (req, res) => {
+  const id = req.body.id;
+  const number = req.body.number;
+  db.deletePhoneNumberById(id, number)
+    .then((data) => {
+      res.status(200).send("Phone number updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
+app.post("/update_address_by_id", (req, res) => {
+  const id = req.body.id;
+  const address = req.body.address;
+  db.deleteAddressById(id, address)
+    .then((data) => {
+      res.status(200).send("Address updated!");
+    })
+    .catch((err) => res.status(400).send(err));
+});
 
 // deletes an entire contact (including name/email/addy/phone#)
 app.post("/delete_contact_by_name", (req, res) => {
