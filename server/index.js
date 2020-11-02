@@ -19,7 +19,6 @@ app.listen(port, () => {
 ////////////////////////////////////////////////////////
 // GET ROUTES
 ////////////////////////////////////////////////////////
-
 app.get("/get_all_names", (req, res) => {
   db.getAllNames()
     .then((data) => {
@@ -32,37 +31,30 @@ app.get("/get_info_by_name", (req, res) => {
   const name = req.body.name;
   db.getInfoByName(name)
     .then((data) => {
-      res.status(200).send(data.rows);
+      // This function will filter out duplicate data that is created from the query.
+      function clean() {
+        let results = {},
+          addressObj = {},
+          emailObj = {},
+          numberObj = {};
+
+        for (let i = 0; i < data.rows.length; i++) {
+          let dataShard = data.rows[i];
+          addressObj[dataShard.address] = 1;
+          emailObj[dataShard.email] = 1;
+          numberObj[dataShard.number] = 1;
+        }
+        results.address = Object.keys(addressObj);
+        results.email = Object.keys(emailObj);
+        results.number = Object.keys(numberObj);
+        return results;
+      }
+
+      const filteredData = clean(data.rows);
+      res.status(200).send(filteredData);
     })
     .catch((err) => res.status(400).send(err));
 });
-
-// app.get("/get_email_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getEmailAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.get("/get_phone_number_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getPhoneNumberAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.get("/get_address_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getAddressAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
 
 ////////////////////////////////////////////////////////
 // ADD ROUTES
@@ -174,7 +166,37 @@ app.post("/delete_contact_by_name", (req, res) => {
   const name = req.body.name;
   db.deleteContactByName(name)
     .then((data) => {
-      res.status(200).send(data);
+      res.status(200).send("Contact deleted!");
     })
     .catch((err) => res.status(400).send(err));
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// Paths written when using a more specific ID property, removed for simplicity. saved just in case
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// app.get("/get_email_and_id_by_name", (req, res) => {
+//   const name = req.body.name;
+//   db.getEmailAndIdByName(name)
+//     .then((data) => {
+//       res.status(200).send(data.rows);
+//     })
+//     .catch((err) => res.status(400).send(err));
+// });
+
+// app.get("/get_phone_number_and_id_by_name", (req, res) => {
+//   const name = req.body.name;
+//   db.getPhoneNumberAndIdByName(name)
+//     .then((data) => {
+//       res.status(200).send(data.rows);
+//     })
+//     .catch((err) => res.status(400).send(err));
+// });
+
+// app.get("/get_address_and_id_by_name", (req, res) => {
+//   const name = req.body.name;
+//   db.getAddressAndIdByName(name)
+//     .then((data) => {
+//       res.status(200).send(data.rows);
+//     })
+//     .catch((err) => res.status(400).send(err));
+// });

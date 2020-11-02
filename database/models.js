@@ -28,16 +28,14 @@ module.exports = {
   getInfoByName: (name) => {
     return db.query(
       `SELECT 
-      address, email, number 
-      FROM
-       people
-       INNER JOIN mail 
-       ON mail.name = people.name 
+          distinct address, email, number 
+       FROM
+          mail 
        INNER JOIN phone 
-       ON phone.name = people.name 
+          ON phone.name = mail.name 
        INNER JOIN addresses
-       ON addresses.name = people.name 
-       WHERE people.name = '${name}';`
+          ON addresses.name = mail.name 
+       WHERE mail.name = '${name}';`
     );
   },
   addName: (name) => {
@@ -108,3 +106,17 @@ module.exports = {
 //     `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
 //   );
 // }
+
+// getInfoByName: (name) => {
+//   return db.query(
+//     `SELECT
+//      distinct address, email, number
+//     FROM
+//     mail
+//      FULL JOIN phone
+//      ON phone.name = mail.name
+//      FULL JOIN addresses
+//      ON addresses.name = mail.name
+//      WHERE mail.name = '${name}';`
+//   );
+// },
