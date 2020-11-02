@@ -22,22 +22,22 @@ const db = require("./index.js");
 // delete email/phone number/address/name by name
 
 module.exports = {
-  getAllPeople: () => {
+  getAllNames: () => {
     return db.query(`SELECT * FROM people;`);
   },
-  getEmailAndIdByName: (name) => {
+  getInfoByName: (name) => {
     return db.query(
-      `SELECT mail.id, mail.email FROM mail WHERE mail.name = '${name}';`
-    );
-  },
-  getPhoneNumberAndIdByName: (name) => {
-    return db.query(
-      `SELECT phone.id, phone.number FROM phone WHERE phone.name = '${name}';`
-    );
-  },
-  getAddressAndIdByName: (name) => {
-    return db.query(
-      `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
+      `SELECT 
+      address, email, number 
+      FROM
+       people
+       INNER JOIN mail 
+       ON mail.name = people.name 
+       INNER JOIN phone 
+       ON phone.name = people.name 
+       INNER JOIN addresses
+       ON addresses.name = people.name 
+       WHERE people.name = '${name}';`
     );
   },
   addName: (name) => {
@@ -58,27 +58,31 @@ module.exports = {
       `INSERT INTO addresses (name, address) VALUES ('${name}', '${address}');`
     );
   },
-  updateEmailById: (id, email) => {
-    return db.query(`UPDATE mail SET email = '${email}' WHERE id = '${id}';`);
-  },
-  updatePhoneNumberById: (id, number) => {
+  updateEmail: (oldEmail, newEmail) => {
     return db.query(
-      `UPDATE phone SET number = '${number}' WHERE id = '${id}';`
+      `UPDATE mail SET email = '${newEmail}' WHERE email = '${oldEmail}';`
     );
   },
-  updateAddressById: (id, address) => {
+  updatePhoneNumber: (oldNumber, newNumber) => {
     return db.query(
-      `UPDATE addresses SET address = '${address}' WHERE id = '${id}';`
+      `UPDATE phone SET number = '${newNumber}' WHERE number = '${oldNumber}';`
     );
   },
-  deleteEmailById: (id) => {
-    return db.query(`DELETE FROM mail WHERE mail.id = '${id}';`);
+  updateAddress: (oldAddress, newAddress) => {
+    return db.query(
+      `UPDATE addresses SET address = '${newAddress}' WHERE address = '${oldAddress}';`
+    );
   },
-  deletePhoneNumberById: (id) => {
-    return db.query(`DELETE FROM phone WHERE phone.id = '${id}';`);
+  deleteEmail: (email) => {
+    return db.query(`DELETE FROM mail WHERE mail.email = '${email}';`);
   },
-  deleteAddressById: (id) => {
-    return db.query(`DELETE FROM addresses WHERE addresses.id = '${id}';`);
+  deletePhoneNumber: (number) => {
+    return db.query(`DELETE FROM phone WHERE phone.number = '${number}';`);
+  },
+  deleteAddress: (address) => {
+    return db.query(
+      `DELETE FROM addresses WHERE addresses.address = '${address}';`
+    );
   },
   deleteContactByName: (name) => {
     return db.query(`DELETE FROM people WHERE people.name = '${name}';`);
@@ -88,18 +92,19 @@ module.exports = {
 // Original querry idea, this will present an issue when modifying specific numbers/emails/addresses.
 // I will instead break into individual querries
 //
-// getInfoByName: (name) => {
+
+// getEmailAndIdByName: (name) => {
 //   return db.query(
-//     `SELECT
-//       name, address, email, number
-//     FROM
-//       people
-//     INNER JOIN
-//       mail ON mail.name = people.name
-//     INNER JOIN
-//       phone ON phone.name = people.name
-//     INNER JOIN
-//       addresses ON addresses.name = people.name
-//     WHERE people.name = '${name}'`
+//     `SELECT mail.id, mail.email FROM mail WHERE mail.name = '${name}';`
 //   );
 // },
+// getPhoneNumberAndIdByName: (name) => {
+//   return db.query(
+//     `SELECT phone.id, phone.number FROM phone WHERE phone.name = '${name}';`
+//   );
+// },
+// getAddressAndIdByName: (name) => {
+//   return db.query(
+//     `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
+//   );
+// }
