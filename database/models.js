@@ -3,23 +3,22 @@ const db = require("./index.js");
 // ALL QUERRIES:
 // get all names
 //
-// get email and id by name
-// get phone number and id by name
-// get address and id by name
+// get all info associated with name
 //
+// add name
 // add email by name
 // add phone number by name
 // add address by name
 //
-// update email by id
-// update phone number by id
-// update address by id
+// update email
+// update phone number
+// update address
 //
-// delete email by id
-// delete phone numer by id
-// delete address by id
+// delete email
+// delete phone number
+// delete address
 //
-// delete email/phone number/address/name by name
+// delete all info associated with name
 
 module.exports = {
   getAllNames: () => {
@@ -87,9 +86,8 @@ module.exports = {
   },
 };
 
-// Original querry idea, this will present an issue when modifying specific numbers/emails/addresses.
-// I will instead break into individual querries
-//
+// Original query idea, decided to force unique numbers/addresses/emails
+// Tradeoff: less clutter/routes but cant use same address for people in a household etc
 
 // getEmailAndIdByName: (name) => {
 //   return db.query(
@@ -106,17 +104,3 @@ module.exports = {
 //     `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
 //   );
 // }
-
-// getInfoByName: (name) => {
-//   return db.query(
-//     `SELECT
-//      distinct address, email, number
-//     FROM
-//     mail
-//      FULL JOIN phone
-//      ON phone.name = mail.name
-//      FULL JOIN addresses
-//      ON addresses.name = mail.name
-//      WHERE mail.name = '${name}';`
-//   );
-// },

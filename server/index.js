@@ -2,18 +2,20 @@ const path = require("path");
 const express = require("express");
 const port = process.env.PORT || 3001;
 const cors = require("cors");
-
 const db = require("../database/models");
-
-let app = express();
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, "../build")));
 app.use(cors());
 
 app.listen(port, () => {
   console.log(`\n Server is up and listening on port: ${port}`.blue);
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 ////////////////////////////////////////////////////////
@@ -39,7 +41,7 @@ app.get("/get_info_by_name", (req, res) => {
           numberObj = {};
 
         for (let i = 0; i < data.rows.length; i++) {
-          let dataShard = data.rows[i];
+          const dataShard = data.rows[i];
           addressObj[dataShard.address] = 1;
           emailObj[dataShard.email] = 1;
           numberObj[dataShard.number] = 1;
@@ -170,33 +172,3 @@ app.post("/delete_contact_by_name", (req, res) => {
     })
     .catch((err) => res.status(400).send(err));
 });
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-// Paths written when using a more specific ID property, removed for simplicity. saved just in case
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-// app.get("/get_email_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getEmailAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.get("/get_phone_number_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getPhoneNumberAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
-
-// app.get("/get_address_and_id_by_name", (req, res) => {
-//   const name = req.body.name;
-//   db.getAddressAndIdByName(name)
-//     .then((data) => {
-//       res.status(200).send(data.rows);
-//     })
-//     .catch((err) => res.status(400).send(err));
-// });
