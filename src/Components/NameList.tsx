@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import AName from "./AName";
 
-export const NameList: React.FC = () => {
-  const [,] = useState(false);
+interface Props {
+  listOfNames: any[];
+}
 
+export const NamesList: React.FC<Props> = (props) => {
   return (
-    <div className="name-list">
-      <div>MAP OVER NAME LIST HERE</div>
+    <div className="names-list">
+      <div>
+        {props.listOfNames.map((aName) => {
+          return <AName name={aName.name} />;
+        })}
+      </div>
     </div>
   );
 };
 
-export default NameList;
+export default NamesList;

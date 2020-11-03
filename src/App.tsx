@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 import SearchBar from "./Components/SearchBar";
 import AddButton from "./Components/AddButton";
-import NameList from "./Components/NameList";
+import NamesList from "./Components/NameList";
 import AddModal from "./Components/AddModal";
 import ContactModal from "./Components/ContactModal";
 
 export const App: React.FC = () => {
   // these hooks will be used to determine if infocard modal or add contact modal are showing
-  const [infoCardModal, setInfoCard] = useState(false);
-  const [addCardModal, setAddCard] = useState(false);
+
+  // HOOKS
+  const [displayInfoModal, setDisplayInfoModal] = useState(false);
+  const [displayAddModal, setDisplayAddModal] = useState(false);
+  const [inputText, setInputText] = useState("");
+  const [listOfNames, setListOfNames] = useState([]);
+
+  // QUERIES
+  const getAllNames = () => {
+    axios
+      .get("/get_all_names")
+      .then((result) => {
+        setListOfNames(result.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // GET INFO ON MOUNT
+  useEffect(() => {
+    getAllNames();
+  }, []);
 
   return (
     <div>
       <div className="header-text">FACEBOOK</div>
 
-      <SearchBar></SearchBar>
-      <AddButton></AddButton>
-      <NameList></NameList>
+      <SearchBar inputText={inputText} setInputText={setInputText} />
+      <AddButton />
+      <NamesList listOfNames={listOfNames} />
 
-      <AddModal></AddModal>
-      <ContactModal></ContactModal>
+      <AddModal />
+      <ContactModal />
 
       <div className="footer-text">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights

@@ -22,7 +22,7 @@ const db = require("./index.js");
 
 module.exports = {
   getAllNames: () => {
-    return db.query(`SELECT * FROM people;`);
+    return db.query(`SELECT name FROM people;`);
   },
   getInfoByName: (name) => {
     return db.query(

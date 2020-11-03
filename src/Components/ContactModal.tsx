@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export const ContactModal: React.FC = () => {
-  const [,] = useState(false);
+  // const [,] = useState(false);
 
   return (
     <div className="contact-modal">
