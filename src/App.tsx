@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import SearchBar from "./Components/SearchBar";
+import AddButton from "./Components/AddButton";
+import NameList from "./Components/NameList";
+import AddModal from "./Components/AddModal";
+import ContactModal from "./Components/ContactModal";
 
-function App() {
+export const App: React.FC = () => {
+  // these hooks will be used to determine if infocard modal or add contact modal are showing
+  const [infoCardModal, setInfoCard] = useState(false);
+  const [addCardModal, setAddCard] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="header-text">FACEBOOK</div>
+
+      <SearchBar></SearchBar>
+      <AddButton></AddButton>
+      <NameList></NameList>
+
+      <AddModal></AddModal>
+      <ContactModal></ContactModal>
+
+      <div className="footer-text">
+        Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
+        Reserved
+      </div>
     </div>
   );
-}
+};
 
 export default App;
