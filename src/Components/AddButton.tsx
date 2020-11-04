@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const AddButton: React.FC = () => {
-  // const [,] = useState(false);
+interface Props {
+  displayAddModal: boolean;
+  setDisplayAddModal: (displayAddModal: boolean) => void;
+}
 
+export const AddButton: React.FC<Props> = (props) => {
   return (
     <div className="add-button">
-      <button>Add Contact</button>
+      <button onClick={() => props.setDisplayAddModal(!props.displayAddModal)}>
+        Add Contact
+      </button>
     </div>
   );
 };

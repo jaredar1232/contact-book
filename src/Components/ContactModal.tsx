@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const ContactModal: React.FC = () => {
   // const [,] = useState(false);
