@@ -69,7 +69,6 @@ export const App: React.FC = () => {
   return (
     <div>
       <div className="header-text">The Compendium</div>
-
       <SearchBar inputText={inputText} setInputText={setInputText} />
       <AddButton
         displayAddModal={displayAddModal}
@@ -78,11 +77,14 @@ export const App: React.FC = () => {
       <br></br>
       <NamesList filteredListOfNames={filteredListOfNames} />
       <br></br>
-
-      <AddModal displayAddModal={displayAddModal} getAllNames={getAllNames} />
+      <AddModal
+        displayAddModal={displayAddModal}
+        getAllNames={getAllNames}
+        setDisplayAddModal={setDisplayAddModal}
+      />
       <br></br>
       <ContactModal />
-
+      props.setDisplayAddModal(!props.displayAddModal)
       <div className="footer-text">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
         Reserved

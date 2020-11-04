@@ -4,6 +4,7 @@ import axios from "axios";
 interface Props {
   displayAddModal: boolean;
   getAllNames: () => void;
+  setDisplayAddModal: (displayAddModal: boolean) => void;
 }
 
 export const AddModal: React.FC<Props> = (props) => {
@@ -68,6 +69,7 @@ export const AddModal: React.FC<Props> = (props) => {
     multiQuery(arrayOfAddresses, addressesPath, "address");
     multiQuery(arrayOfEmails, emailsPath, "email");
     props.getAllNames();
+    props.setDisplayAddModal(!props.displayAddModal);
   };
 
   return (
