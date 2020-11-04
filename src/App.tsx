@@ -84,7 +84,7 @@ export const App: React.FC = () => {
       />
       <br></br>
       <ContactModal />
-      props.setDisplayAddModal(!props.displayAddModal)
+
       <div className="footer-text">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
         Reserved
