@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import AddressList from "./AddressList";
-import EmailList from "./EmailList";
-import NumberList from "./NumberList";
+import DataList from "./DataList";
 
 interface Props {
   selectedName: string;
@@ -61,13 +59,13 @@ export const ContactModal: React.FC<Props> = (props) => {
       <div>CONTACT MODAL</div>
       <div>{props.selectedName}</div>
       {addressArray.map((aAddress) => (
-        <AddressList aAddress={aAddress} key={aAddress} />
+        <DataList dataForContact={aAddress} key={aAddress} />
       ))}
       {emailArray.map((aEmail) => (
-        <EmailList aEmail={aEmail} key={aEmail} />
+        <DataList dataForContact={aEmail} key={aEmail} />
       ))}
       {numberArray.map((aNumber) => (
-        <NumberList aNumber={aNumber} key={aNumber} />
+        <DataList dataForContact={aNumber} key={aNumber} />
       ))}
       <div onClick={() => deleteContactByName(props.selectedName)}>
         DELETE CONTACT
