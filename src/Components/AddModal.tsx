@@ -19,10 +19,6 @@ export const AddModal: React.FC<Props> = (props) => {
   const [emailVal2, setEmailVal2] = useState("");
   const [emailVal3, setEmailVal3] = useState("");
 
-  // creat arrays of each value
-  // create a function that does an appropriate axios call
-  // iterate over the array using the axios call on each element
-
   // USED TO CLEAR FORM
   const clearForm = () => {
     setNameVal("");

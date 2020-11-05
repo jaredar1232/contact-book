@@ -97,6 +97,7 @@ export const App: React.FC = () => {
         selectedName={selectedName}
         displayInfoModal={displayInfoModal}
         setDisplayInfoModal={setDisplayInfoModal}
+        getAllNames={getAllNames}
       />
 
       <div className="footer-text">

@@ -8,6 +8,7 @@ interface Props {
   selectedName: string;
   displayInfoModal: boolean;
   setDisplayInfoModal: (displayInfoModal: boolean) => void;
+  getAllNames: () => void;
 }
 
 export const ContactModal: React.FC<Props> = (props) => {
@@ -15,10 +16,26 @@ export const ContactModal: React.FC<Props> = (props) => {
   const [emailArray, setEmailArray] = useState([""]);
   const [numberArray, setNumberArray] = useState([""]);
 
+  // SETS STATE WITH DATA FROM QUERIES
   const setDataArrays = (dataToBeStored: any) => {
     setAddressArray(dataToBeStored.address);
     setEmailArray(dataToBeStored.email);
     setNumberArray(dataToBeStored.number);
+  };
+
+  //////////////////////////////
+  // QUERIES
+  //////////////////////////////
+  const deleteContactByName = (nameToDelete: string) => {
+    axios
+      .post("/delete_contact_by_name", { name: `${nameToDelete}` })
+      .then(() => {
+        props.getAllNames();
+        props.setDisplayInfoModal(!props.displayInfoModal);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // GETS DATA RELATED TO selectedName WHENEVER selectedName CHANGES AND STORES IT
@@ -52,8 +69,14 @@ export const ContactModal: React.FC<Props> = (props) => {
       {numberArray.map((aNumber) => (
         <NumberList aNumber={aNumber} key={aNumber} />
       ))}
+      <div onClick={() => deleteContactByName(props.selectedName)}>
+        DELETE CONTACT
+      </div>
     </div>
   );
 };
 
 export default ContactModal;
+
+// edit button
+// delete individual
