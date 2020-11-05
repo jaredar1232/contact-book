@@ -86,7 +86,9 @@ module.exports = {
   },
 };
 
-// Original query idea, decided to force unique numbers/addresses/emails
+// Original query idea was to use unique ids so there could more than one of the same name
+// Decided to force unique numbers/addresses/emails/names instead due to time
+//
 // Tradeoff: less clutter/routes but cant use same address for people in a household etc
 
 // getEmailAndIdByName: (name) => {

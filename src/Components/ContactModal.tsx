@@ -1,6 +1,12 @@
 import React from "react";
 
-export const ContactModal: React.FC = () => {
+interface Props {
+  selectedName: string;
+  displayInfoModal: boolean;
+  setDisplayInfoModal: (displayInfoModal: boolean) => void;
+}
+
+export const ContactModal: React.FC<Props> = () => {
   // const [,] = useState(false);
 
   return (

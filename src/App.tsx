@@ -9,7 +9,8 @@ import ContactModal from "./Components/ContactModal";
 
 export const App: React.FC = () => {
   // HOOKS
-  // const [displayInfoModal, setDisplayInfoModal] = useState(false);
+  const [displayInfoModal, setDisplayInfoModal] = useState(false);
+  const [selectedName, setSelectedName] = useState("");
   const [displayAddModal, setDisplayAddModal] = useState(false);
   const [inputText, setInputText] = useState("");
   const [listOfNames, setListOfNames] = useState([""]);
@@ -31,6 +32,11 @@ export const App: React.FC = () => {
     }
     // this second set of names is used to prevent permanent removal from the names list when searching
     return arrayOfFilteredNames;
+  };
+
+  const setSelectedNameMethod = (name: string) => {
+    setSelectedName(name);
+    setDisplayInfoModal(true);
   };
 
   /////////////////////////////////////////////////////////
@@ -75,7 +81,10 @@ export const App: React.FC = () => {
         setDisplayAddModal={setDisplayAddModal}
       />
       <br></br>
-      <NamesList filteredListOfNames={filteredListOfNames} />
+      <NamesList
+        filteredListOfNames={filteredListOfNames}
+        setSelectedNameMethod={setSelectedNameMethod}
+      />
       <br></br>
       <AddModal
         displayAddModal={displayAddModal}
@@ -83,7 +92,12 @@ export const App: React.FC = () => {
         setDisplayAddModal={setDisplayAddModal}
       />
       <br></br>
-      <ContactModal />
+
+      <ContactModal
+        selectedName={selectedName}
+        displayInfoModal={displayInfoModal}
+        setDisplayInfoModal={setDisplayInfoModal}
+      />
 
       <div className="footer-text">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
