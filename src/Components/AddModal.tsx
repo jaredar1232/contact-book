@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Props {
@@ -23,6 +23,56 @@ export const AddModal: React.FC<Props> = (props) => {
   // create a function that does an appropriate axios call
   // iterate over the array using the axios call on each element
 
+  // USED TO CLEAR FORM
+  const clearForm = () => {
+    setNameVal("");
+    setNumberVal1("");
+    setNumberVal2("");
+    setNumberVal3("");
+    setAddressVal1("");
+    setAddressVal2("");
+    setAddressVal3("");
+    setEmailVal1("");
+    setEmailVal2("");
+    setEmailVal3("");
+  };
+
+  ////////////////////////////////
+  // QUERIES
+  ////////////////////////////////
+  const multiQuery = async (
+    arrayOfValues: string[],
+    path: string,
+    dataType: string
+  ) => {
+    for (let i = 0; i < arrayOfValues.length; i++) {
+      if (arrayOfValues[i] !== "" && nameVal !== "") {
+        await axios
+          .post(`${path}`, {
+            [dataType]: arrayOfValues[i],
+            name: nameVal,
+          })
+          .catch((err) => {
+            window.alert(
+              `The ${dataType} field encounted an issue being saved. Ensure this info isn't already being used for a contact and try again.`
+            );
+            console.log(err);
+          });
+      }
+    }
+  };
+
+  const addName = async () => {
+    if (nameVal !== "") {
+      await axios
+        .post("/add_name", {
+          name: nameVal,
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  // SUBMIT HANDLER
   const submitDataHandler = () => {
     const arrayOfNumbers = [numberVal1, numberVal2, numberVal3],
       arrayOfAddresses = [addressVal1, addressVal2, addressVal3],
@@ -32,42 +82,13 @@ export const AddModal: React.FC<Props> = (props) => {
       addressesPath = "/add_address_by_name",
       emailsPath = "/add_email_by_name";
 
-    const multiQuery = async (
-      arrayOfValues: string[],
-      path: string,
-      dataType: string
-    ) => {
-      for (let i = 0; i < arrayOfValues.length; i++) {
-        if (arrayOfValues[i] !== "" && nameVal !== "") {
-          await axios
-            .post(`${path}`, {
-              [dataType]: arrayOfValues[i],
-              name: nameVal,
-            })
-            .catch((err) => {
-              window.alert(
-                `The ${dataType} field encounted an issue being saved. Ensure this info isn't already being used for a contact and try again.`
-              );
-              console.log(err);
-            });
-        }
-      }
-    };
-
-    const addName = async () => {
-      if (nameVal !== "") {
-        await axios
-          .post("/add_name", {
-            name: nameVal,
-          })
-          .catch((err) => console.log(err));
-      }
-    };
-
+    // adds name to database before data associated with name
     addName();
     multiQuery(arrayOfNumbers, numbersPath, "number");
     multiQuery(arrayOfAddresses, addressesPath, "address");
     multiQuery(arrayOfEmails, emailsPath, "email");
+
+    clearForm();
     props.getAllNames();
     props.setDisplayAddModal(!props.displayAddModal);
   };
