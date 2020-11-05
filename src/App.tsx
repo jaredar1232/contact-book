@@ -3,9 +3,9 @@ import axios from "axios";
 import "./App.css";
 import SearchBar from "./Components/SearchBar";
 import AddButton from "./Components/AddButton";
-import NamesList from "./Components/NamesList";
+import NamesList from "./Components/NamesList/NamesList";
 import AddModal from "./Components/AddModal";
-import ContactModal from "./Components/ContactModal";
+import ContactModal from "./Components/ContactModal/ContactModal";
 
 export const App: React.FC = () => {
   // HOOKS

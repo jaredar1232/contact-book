@@ -30,7 +30,7 @@ app.get("/get_all_names", (req, res) => {
 });
 
 app.get("/get_info_by_name", (req, res) => {
-  const name = req.body.name;
+  const name = req.query.name;
   db.getInfoByName(name)
     .then((data) => {
       // This function will filter out duplicate data that is created from the query.
