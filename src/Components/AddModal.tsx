@@ -33,9 +33,6 @@ export const AddModal: React.FC<Props> = (props) => {
     setEmailVal3("");
   };
 
-  ////////////////////////////////
-  // QUERIES
-  ////////////////////////////////
   const multiQuery = async (
     arrayOfValues: string[],
     path: string,
@@ -58,7 +55,7 @@ export const AddModal: React.FC<Props> = (props) => {
     }
   };
 
-  const addName = async () => {
+  const addNameQuery = async () => {
     if (nameVal !== "") {
       await axios
         .post("/add_name", {
@@ -68,7 +65,6 @@ export const AddModal: React.FC<Props> = (props) => {
     }
   };
 
-  // SUBMIT HANDLER
   const submitDataHandler = async () => {
     const arrayOfNumbers = [numberVal1, numberVal2, numberVal3],
       arrayOfAddresses = [addressVal1, addressVal2, addressVal3],
@@ -80,7 +76,7 @@ export const AddModal: React.FC<Props> = (props) => {
 
     // ADDS NAME TO DATABASE BEFORE ADDING RELATED DATA
     // AWAITS USED TO PREVENT A TIMING BUG ON THE FONTEND
-    await addName();
+    await addNameQuery();
     await multiQuery(arrayOfNumbers, numbersPath, "number");
     await multiQuery(arrayOfAddresses, addressesPath, "address");
     await multiQuery(arrayOfEmails, emailsPath, "email");

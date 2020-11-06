@@ -39,13 +39,11 @@ export const ContactModal: React.FC<Props> = (props) => {
   };
 
   const getInfoByName = (name: string) => {
-    console.log(name);
     axios
       .get("/get_info_by_name", {
         params: { name: `${name}` },
       })
       .then((response) => {
-        console.log("loging response data for getInfoByName", response.data);
         setDataArrays(response.data);
       })
       .catch((error) => {
@@ -105,4 +103,3 @@ export const ContactModal: React.FC<Props> = (props) => {
 export default ContactModal;
 
 // edit button
-// delete individual
