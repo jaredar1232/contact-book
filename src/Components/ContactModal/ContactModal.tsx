@@ -4,6 +4,7 @@ import DataList from "./DataList";
 
 interface Props {
   selectedName: string;
+  setSelectedName: (selectedName: string) => void;
   displayInfoModal: boolean;
   setDisplayInfoModal: (displayInfoModal: boolean) => void;
   getAllNames: () => void;
@@ -29,6 +30,7 @@ export const ContactModal: React.FC<Props> = (props) => {
       .post("/delete_contact_by_name", { name: `${nameToDelete}` })
       .then(() => {
         props.getAllNames();
+        props.setSelectedName("");
         props.setDisplayInfoModal(!props.displayInfoModal);
       })
       .catch((err) => {
@@ -36,18 +38,26 @@ export const ContactModal: React.FC<Props> = (props) => {
       });
   };
 
-  // GETS DATA RELATED TO selectedName WHENEVER selectedName CHANGES AND STORES IT
-  useEffect(() => {
+  const getInfoByName = (name: string) => {
+    console.log(name);
     axios
-      .get("/get_info_by_name", { params: { name: `${props.selectedName}` } })
+      .get("/get_info_by_name", {
+        params: { name: `${name}` },
+      })
       .then((response) => {
+        console.log("loging response data for getInfoByName", response.data);
         setDataArrays(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [props.selectedName]);
+  };
 
+  // GETS DATA RELATED TO selectedName WHENEVER selectedName CHANGES AND STORES IT
+  useEffect(() => {
+    getInfoByName(props.selectedName);
+  }, [props.selectedName]);
+  // props.selectedName;
   return (
     <div
       className="contact-modal"
@@ -59,13 +69,31 @@ export const ContactModal: React.FC<Props> = (props) => {
       <div>CONTACT MODAL</div>
       <div>{props.selectedName}</div>
       {addressArray.map((aAddress) => (
-        <DataList dataForContact={aAddress} key={aAddress} />
+        <DataList
+          dataForContact={aAddress}
+          key={aAddress}
+          dataType="Address"
+          getInfoByName={getInfoByName}
+          currentName={props.selectedName}
+        />
       ))}
       {emailArray.map((aEmail) => (
-        <DataList dataForContact={aEmail} key={aEmail} />
+        <DataList
+          dataForContact={aEmail}
+          key={aEmail}
+          dataType="Email"
+          getInfoByName={getInfoByName}
+          currentName={props.selectedName}
+        />
       ))}
       {numberArray.map((aNumber) => (
-        <DataList dataForContact={aNumber} key={aNumber} />
+        <DataList
+          dataForContact={aNumber}
+          key={aNumber}
+          dataType="Number"
+          getInfoByName={getInfoByName}
+          currentName={props.selectedName}
+        />
       ))}
       <div onClick={() => deleteContactByName(props.selectedName)}>
         DELETE CONTACT

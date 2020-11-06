@@ -24,18 +24,16 @@ module.exports = {
   getAllNames: () => {
     return db.query(`SELECT name FROM people;`);
   },
-  getInfoByName: (name) => {
+  getAddressByName: (name) => {
     return db.query(
-      `SELECT 
-          distinct address, email, number 
-       FROM
-          mail 
-       INNER JOIN phone 
-          ON phone.name = mail.name 
-       INNER JOIN addresses
-          ON addresses.name = mail.name 
-       WHERE mail.name = '${name}';`
+      `SELECT address FROM addresses WHERE addresses.name = '${name}';`
     );
+  },
+  getNumberByName: (name) => {
+    return db.query(`SELECT number FROM phone WHERE phone.name = '${name}';`);
+  },
+  getEmailByName: (name) => {
+    return db.query(`SELECT email FROM mail WHERE mail.name = '${name}';`);
   },
   addName: (name) => {
     return db.query(`INSERT INTO people (name) VALUES ('${name}');`);
@@ -106,3 +104,22 @@ module.exports = {
 //     `SELECT addresses.id, addresses.address FROM addresses WHERE addresses.name = '${name}';`
 //   );
 // }
+
+// old get all by name, runs into issues if a field is missing
+// `SELECT
+//           distinct address, email, number
+//        FROM
+//           mail
+//        INNER JOIN phone
+//           ON phone.name = mail.name
+//        INNER JOIN addresses
+//           ON addresses.name = mail.name
+//        WHERE mail.name = '${name}';`;
+
+//       `
+//         SELECT address FROM addresses WHERE addresses.name = '${name}'
+//  UNION
+//         SELECT number FROM phone WHERE phone.name = '${name}'
+//  UNION
+//         SELECT email FROM mail WHERE mail.name = '${name}'
+//       `;

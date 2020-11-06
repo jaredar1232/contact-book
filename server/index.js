@@ -29,31 +29,33 @@ app.get("/get_all_names", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-app.get("/get_info_by_name", (req, res) => {
+app.get("/get_info_by_name", async (req, res) => {
   const name = req.query.name;
-  db.getInfoByName(name)
-    .then((data) => {
-      // This function will filter out duplicate data that is created from the query.
-      function clean() {
-        let results = {},
-          addressObj = {},
-          emailObj = {},
-          numberObj = {};
+  // const name = req.body.name;
+  const results = {};
 
-        for (let i = 0; i < data.rows.length; i++) {
-          const dataShard = data.rows[i];
-          addressObj[dataShard.address] = 1;
-          emailObj[dataShard.email] = 1;
-          numberObj[dataShard.number] = 1;
-        }
-        results.address = Object.keys(addressObj);
-        results.email = Object.keys(emailObj);
-        results.number = Object.keys(numberObj);
-        return results;
-      }
+  // used to restructure the results from query
+  const saveToResults = (unfilteredData, name) => {
+    let dataArray = [];
+    for (let i = 0; i < unfilteredData.length; i++) {
+      dataArray.push(unfilteredData[i][name]);
+    }
+    results[name] = dataArray;
+  };
 
-      const filteredData = clean(data.rows);
-      res.status(200).send(filteredData);
+  // had to hack together this tri query as JOIN and UNIONS weren't getting me what I needed
+  Promise.all([
+    db.getAddressByName(name),
+    db.getNumberByName(name),
+    db.getEmailByName(name),
+  ])
+    .then((results) => {
+      saveToResults(results[0].rows, "address");
+      saveToResults(results[1].rows, "number");
+      saveToResults(results[2].rows, "email");
+    })
+    .then(() => {
+      res.status(200).send(results);
     })
     .catch((err) => res.status(400).send(err));
 });

@@ -20,7 +20,7 @@ export const AddModal: React.FC<Props> = (props) => {
   const [emailVal3, setEmailVal3] = useState("");
 
   // USED TO CLEAR FORM
-  const clearForm = () => {
+  const clearForm = async () => {
     setNameVal("");
     setNumberVal1("");
     setNumberVal2("");
@@ -69,7 +69,7 @@ export const AddModal: React.FC<Props> = (props) => {
   };
 
   // SUBMIT HANDLER
-  const submitDataHandler = () => {
+  const submitDataHandler = async () => {
     const arrayOfNumbers = [numberVal1, numberVal2, numberVal3],
       arrayOfAddresses = [addressVal1, addressVal2, addressVal3],
       arrayOfEmails = [emailVal1, emailVal2, emailVal3];
@@ -78,13 +78,14 @@ export const AddModal: React.FC<Props> = (props) => {
       addressesPath = "/add_address_by_name",
       emailsPath = "/add_email_by_name";
 
-    // adds name to database before data associated with name
-    addName();
-    multiQuery(arrayOfNumbers, numbersPath, "number");
-    multiQuery(arrayOfAddresses, addressesPath, "address");
-    multiQuery(arrayOfEmails, emailsPath, "email");
+    // ADDS NAME TO DATABASE BEFORE ADDING RELATED DATA
+    // AWAITS USED TO PREVENT A TIMING BUG ON THE FONTEND
+    await addName();
+    await multiQuery(arrayOfNumbers, numbersPath, "number");
+    await multiQuery(arrayOfAddresses, addressesPath, "address");
+    await multiQuery(arrayOfEmails, emailsPath, "email");
 
-    clearForm();
+    await clearForm();
     props.getAllNames();
     props.setDisplayAddModal(!props.displayAddModal);
   };
