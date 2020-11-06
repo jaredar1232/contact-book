@@ -8,68 +8,63 @@ import AddModal from "./Components/AddModal";
 import ContactModal from "./Components/ContactModal/ContactModal";
 
 export const App: React.FC = () => {
-  // HOOKS
+  // STATE
   const [displayInfoModal, setDisplayInfoModal] = useState(false);
   const [selectedName, setSelectedName] = useState("");
+  const [selectedID, setSelectedID] = useState(0);
   const [displayAddModal, setDisplayAddModal] = useState(false);
   const [inputText, setInputText] = useState("");
-  const [listOfNames, setListOfNames] = useState([""]);
-  const [filteredListOfNames, setFilteredListOfNames] = useState([""]);
+  const [listOfNamesAndIDs, setListOfNamesAndIDs] = useState([
+    { name_id: 0, name: "" },
+  ]);
+  const [filteredListOfNames, setFilteredListOfNames] = useState([{}]);
 
-  /////////////////////////////////////////////////////////
   // METHODS
-  /////////////////////////////////////////////////////////
   // FILTER listOfNames BASED ON SEARCHBAR inputText
-  const filterListOfNames = (arrayOfItems: any[], targetString: string) => {
-    const arrayOfFilteredNames = [];
-    // iterates over names list, creating a filted list based on what is typed in the search bar
-    for (let i = 0; i < arrayOfItems.length; i++) {
-      const lowerTargetString = targetString.toLocaleLowerCase();
-      const lowerString = arrayOfItems[i].toLocaleLowerCase();
+  const filterListOfNames = (
+    arrayOfObjects: { name_id: number; name: string }[],
+    targetString: string
+  ) => {
+    const arrayOfFilteredNamesAndIDs = [];
+    // iterates over names, creating a filted list based on what is typed in the search bar
+    for (let i = 0; i < arrayOfObjects.length; i++) {
+      const lowerTargetString = targetString.toLowerCase();
+      const lowerString = arrayOfObjects[i].name.toLowerCase();
+
       if (lowerString.includes(lowerTargetString)) {
-        arrayOfFilteredNames.push(arrayOfItems[i]);
+        arrayOfFilteredNamesAndIDs.push(arrayOfObjects[i]);
       }
     }
     // this second set of names is used to prevent permanent removal from the names list when searching
-    return arrayOfFilteredNames;
+    return arrayOfFilteredNamesAndIDs;
   };
 
-  const setSelectedNameMethod = (name: string) => {
+  const nameClickHandler = (ID: number, name: string) => {
+    setSelectedID(ID);
     setSelectedName(name);
     setDisplayInfoModal(true);
   };
 
-  /////////////////////////////////////////////////////////
   // QUERIES
-  /////////////////////////////////////////////////////////
   const getAllNames = async () => {
     await axios
-      .get("/get_all_names")
+      .get("/get_all_names_and_ids")
       .then((result) => {
-        // converts from array of objects w/ name property to array of string names
-        const dataArray = [];
-        for (const person in result.data) {
-          const name = result.data[person].name;
-          dataArray.push(name);
-        }
-
-        setListOfNames(dataArray);
-        setFilteredListOfNames(filterListOfNames(dataArray, ""));
+        setListOfNamesAndIDs(result.data);
+        setFilteredListOfNames(filterListOfNames(result.data, ""));
       })
       .catch((err) => console.log(err));
   };
 
-  /////////////////////////////////////////////////////////
   // USE EFFECTS
-  /////////////////////////////////////////////////////////
-  // ON MOUNT: get all names from db and populate the filtered list of names
+  // ON MOUNT: GET ALL NAMES FROM DB AND POPULATE listOfNamesAndIDs / filteredListOfNames
   useEffect(() => {
     getAllNames();
   }, []);
 
   // UPDATES listOfNames WHENEVER SOMEONE TYPES IN SEARCHBAR
   useEffect(() => {
-    setFilteredListOfNames(filterListOfNames(listOfNames, inputText));
+    setFilteredListOfNames(filterListOfNames(listOfNamesAndIDs, inputText));
   }, [inputText]);
 
   return (
@@ -83,7 +78,7 @@ export const App: React.FC = () => {
       <br></br>
       <NamesList
         filteredListOfNames={filteredListOfNames}
-        setSelectedNameMethod={setSelectedNameMethod}
+        nameClickHandler={nameClickHandler}
       />
       <br></br>
       <AddModal
@@ -95,10 +90,12 @@ export const App: React.FC = () => {
 
       <ContactModal
         selectedName={selectedName}
+        setSelectedName={setSelectedName}
+        selectedID={selectedID}
         displayInfoModal={displayInfoModal}
         setDisplayInfoModal={setDisplayInfoModal}
         getAllNames={getAllNames}
-        setSelectedName={setSelectedName}
+        setSelectedID={setSelectedID}
       />
 
       <div className="footer-text">

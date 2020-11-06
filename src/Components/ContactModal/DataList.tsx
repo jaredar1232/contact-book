@@ -4,8 +4,8 @@ import axios from "axios";
 interface Props {
   dataForContact: string;
   dataType: string;
-  getInfoByName: (name: string) => void;
-  currentName: string;
+  getInfoByID: (ID: number) => void;
+  selectedID: number;
 }
 
 // DATA LIST COMPONENT: RENDERES A PIECE OF INFO FROM AN ARRAY OF DATA AND PROVIDES DELETE ABILITIES
@@ -31,7 +31,7 @@ export const dataList: React.FC<Props> = (props) => {
       })
       .then((response) => {
         console.log(response);
-        props.getInfoByName(props.currentName);
+        props.getInfoByID(props.selectedID);
       })
       .catch((error) => {
         console.log(error);

@@ -9,28 +9,28 @@ let setupDB = async () => {
     console.log("TABLES: Dropped!".bgWhite.black);
 
     await db.query(`CREATE TABLE IF NOT EXISTS people(
-            id SERIAL UNIQUE,
-            name VARCHAR(50) UNIQUE
+            name_id SERIAL UNIQUE,
+            name VARCHAR(50)
         );`);
     console.log(`PEOPLE TABLE: Created! (1/4)`.green);
 
     await db.query(`CREATE TABLE IF NOT EXISTS mail(
-            id SERIAL UNIQUE,
-            name VARCHAR(50) REFERENCES people (name) ON DELETE CASCADE,
+            mail_id SERIAL UNIQUE PRIMARY KEY,
+            name_id INTEGER REFERENCES people (name_id) ON DELETE CASCADE,
             email VARCHAR(50) UNIQUE
         );`);
     console.log(`MAIL TABLE: Created! (2/4)`.green);
 
     await db.query(`CREATE TABLE IF NOT EXISTS phone(
-            id SERIAL UNIQUE,
-            name VARCHAR(50) REFERENCES people (name) ON DELETE CASCADE,
+            phone_id SERIAL UNIQUE PRIMARY KEY,
+            name_id INTEGER REFERENCES people (name_id) ON DELETE CASCADE,
             number VARCHAR(15) UNIQUE
         );`);
     console.log(`PHONE TABLE: Created! (3/4)`.green);
 
     await db.query(`CREATE TABLE IF NOT EXISTS addresses(
-            id SERIAL UNIQUE,
-            name VARCHAR(50) REFERENCES people (name) ON DELETE CASCADE,
+            addresses_id SERIAL UNIQUE PRIMARY KEY,
+            name_id INTEGER REFERENCES people (name_id) ON DELETE CASCADE,
             address VARCHAR(100) UNIQUE
         );`);
     console.log(`ADDRESSES TABLE: Created! (4/4)`.green);

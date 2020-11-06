@@ -5,6 +5,8 @@ import DataList from "./DataList";
 interface Props {
   selectedName: string;
   setSelectedName: (selectedName: string) => void;
+  selectedID: number;
+  setSelectedID: (selectedID: number) => void;
   displayInfoModal: boolean;
   setDisplayInfoModal: (displayInfoModal: boolean) => void;
   getAllNames: () => void;
@@ -30,7 +32,7 @@ export const ContactModal: React.FC<Props> = (props) => {
       .post("/delete_contact_by_name", { name: `${nameToDelete}` })
       .then(() => {
         props.getAllNames();
-        props.setSelectedName("");
+        props.setSelectedID(-1);
         props.setDisplayInfoModal(!props.displayInfoModal);
       })
       .catch((err) => {
@@ -38,11 +40,9 @@ export const ContactModal: React.FC<Props> = (props) => {
       });
   };
 
-  const getInfoByName = (name: string) => {
+  const getInfoByID = (ID: number) => {
     axios
-      .get("/get_info_by_name", {
-        params: { name: `${name}` },
-      })
+      .get(`/get_info_by_id?ID=${ID}`)
       .then((response) => {
         setDataArrays(response.data);
       })
@@ -53,9 +53,9 @@ export const ContactModal: React.FC<Props> = (props) => {
 
   // GETS DATA RELATED TO selectedName WHENEVER selectedName CHANGES AND STORES IT
   useEffect(() => {
-    getInfoByName(props.selectedName);
-  }, [props.selectedName]);
-  // props.selectedName;
+    getInfoByID(props.selectedID);
+  }, [props.selectedID]);
+
   return (
     <div
       className="contact-modal"
@@ -71,8 +71,8 @@ export const ContactModal: React.FC<Props> = (props) => {
           dataForContact={aAddress}
           key={aAddress}
           dataType="Address"
-          getInfoByName={getInfoByName}
-          currentName={props.selectedName}
+          getInfoByID={getInfoByID}
+          selectedID={props.selectedID}
         />
       ))}
       {emailArray.map((aEmail) => (
@@ -80,8 +80,8 @@ export const ContactModal: React.FC<Props> = (props) => {
           dataForContact={aEmail}
           key={aEmail}
           dataType="Email"
-          getInfoByName={getInfoByName}
-          currentName={props.selectedName}
+          getInfoByID={getInfoByID}
+          selectedID={props.selectedID}
         />
       ))}
       {numberArray.map((aNumber) => (
@@ -89,8 +89,8 @@ export const ContactModal: React.FC<Props> = (props) => {
           dataForContact={aNumber}
           key={aNumber}
           dataType="Number"
-          getInfoByName={getInfoByName}
-          currentName={props.selectedName}
+          getInfoByID={getInfoByID}
+          selectedID={props.selectedID}
         />
       ))}
       <div onClick={() => deleteContactByName(props.selectedName)}>

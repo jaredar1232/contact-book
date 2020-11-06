@@ -22,35 +22,37 @@ const db = require("./index.js");
 
 module.exports = {
   getAllNames: () => {
-    return db.query(`SELECT name FROM people;`);
+    return db.query(`SELECT * FROM people;`);
   },
-  getAddressByName: (name) => {
+  getAddressByID: (id) => {
     return db.query(
-      `SELECT address FROM addresses WHERE addresses.name = '${name}';`
+      `SELECT address FROM addresses WHERE addresses.name_id = '${id}';`
     );
   },
-  getNumberByName: (name) => {
-    return db.query(`SELECT number FROM phone WHERE phone.name = '${name}';`);
+  getNumberByID: (id) => {
+    return db.query(`SELECT number FROM phone WHERE phone.name_id = '${id}';`);
   },
-  getEmailByName: (name) => {
-    return db.query(`SELECT email FROM mail WHERE mail.name = '${name}';`);
+  getEmailByID: (id) => {
+    return db.query(`SELECT email FROM mail WHERE mail.name_id = '${id}';`);
   },
   addName: (name) => {
-    return db.query(`INSERT INTO people (name) VALUES ('${name}');`);
-  },
-  addEmailByName: (name, email) => {
     return db.query(
-      `INSERT INTO mail (name, email) VALUES ('${name}', '${email}');`
+      `INSERT INTO people (name) VALUES ('${name}') RETURNING name_id;`
     );
   },
-  addPhoneNumberByName: (name, number) => {
+  addEmailByID: (id, email) => {
     return db.query(
-      `INSERT INTO phone (name, number) VALUES ('${name}', '${number}');`
+      `INSERT INTO mail (name_id, email) VALUES ('${id}', '${email}');`
     );
   },
-  addAddressByName: (name, address) => {
+  addPhoneNumberByID: (id, number) => {
     return db.query(
-      `INSERT INTO addresses (name, address) VALUES ('${name}', '${address}');`
+      `INSERT INTO phone (name_id, number) VALUES ('${id}', '${number}');`
+    );
+  },
+  addAddressByID: (id, address) => {
+    return db.query(
+      `INSERT INTO addresses (name_id, address) VALUES ('${id}', '${address}');`
     );
   },
   updateEmail: (oldEmail, newEmail) => {

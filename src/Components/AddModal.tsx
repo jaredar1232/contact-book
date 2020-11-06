@@ -9,6 +9,7 @@ interface Props {
 
 export const AddModal: React.FC<Props> = (props) => {
   const [nameVal, setNameVal] = useState("");
+  const [returnID, setReturnID] = useState(-1);
   const [numberVal1, setNumberVal1] = useState("");
   const [numberVal2, setNumberVal2] = useState("");
   const [numberVal3, setNumberVal3] = useState("");
@@ -41,9 +42,8 @@ export const AddModal: React.FC<Props> = (props) => {
     for (let i = 0; i < arrayOfValues.length; i++) {
       if (arrayOfValues[i] !== "" && nameVal !== "") {
         await axios
-          .post(`${path}`, {
+          .post(`${path}${returnID}`, {
             [dataType]: arrayOfValues[i],
-            name: nameVal,
           })
           .catch((err) => {
             window.alert(
@@ -61,22 +61,34 @@ export const AddModal: React.FC<Props> = (props) => {
         .post("/add_name", {
           name: nameVal,
         })
+        .then(async (response) => {
+          // const delayer = async () => setReturnID(response.data.name_id);
+          // await delayer();
+          // console.log(response.data.name_id);
+          // console.log(returnID);
+          setReturnID(response.data.name_id);
+          // return response.data.name_id;
+        })
         .catch((err) => console.log(err));
     }
   };
 
   const submitDataHandler = async () => {
+    // ADDS NAME TO DATABASE BEFORE ADDING RELATED DATA
+    await addNameQuery();
+  };
+
+  const followUpSubmit = async () => {
     const arrayOfNumbers = [numberVal1, numberVal2, numberVal3],
       arrayOfAddresses = [addressVal1, addressVal2, addressVal3],
       arrayOfEmails = [emailVal1, emailVal2, emailVal3];
 
-    const numbersPath = "/add_phone_number_by_name",
-      addressesPath = "/add_address_by_name",
-      emailsPath = "/add_email_by_name";
+    const numbersPath = "/add_phone_number_by_id?ID=",
+      addressesPath = "/add_address_by_id?ID=",
+      emailsPath = "/add_email_by_id?ID=";
 
-    // ADDS NAME TO DATABASE BEFORE ADDING RELATED DATA
     // AWAITS USED TO PREVENT A TIMING BUG ON THE FONTEND
-    await addNameQuery();
+
     await multiQuery(arrayOfNumbers, numbersPath, "number");
     await multiQuery(arrayOfAddresses, addressesPath, "address");
     await multiQuery(arrayOfEmails, emailsPath, "email");
@@ -85,6 +97,11 @@ export const AddModal: React.FC<Props> = (props) => {
     props.getAllNames();
     props.setDisplayAddModal(!props.displayAddModal);
   };
+
+  // WAITS FOR ID TO BE RETURNED FROM A NAME SUBMISSION TO DATABASE BEFORE ADDING ASSOCIATED DATA
+  useEffect(() => {
+    followUpSubmit();
+  }, [returnID]);
 
   return (
     <div

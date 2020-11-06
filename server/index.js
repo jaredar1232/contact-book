@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 ////////////////////////////////////////////////////////
 // GET ROUTES
 ////////////////////////////////////////////////////////
-app.get("/get_all_names", (req, res) => {
+app.get("/get_all_names_and_ids", (req, res) => {
   db.getAllNames()
     .then((data) => {
       res.status(200).send(data.rows);
@@ -29,8 +29,8 @@ app.get("/get_all_names", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-app.get("/get_info_by_name", async (req, res) => {
-  const name = req.query.name;
+app.get("/get_info_by_id", async (req, res) => {
+  const ID = req.query.ID;
   // const name = req.body.name;
   const results = {};
 
@@ -45,9 +45,9 @@ app.get("/get_info_by_name", async (req, res) => {
 
   // had to hack together this tri query as JOIN and UNIONS weren't getting me what I needed
   Promise.all([
-    db.getAddressByName(name),
-    db.getNumberByName(name),
-    db.getEmailByName(name),
+    db.getAddressByID(ID),
+    db.getNumberByID(ID),
+    db.getEmailByID(ID),
   ])
     .then((results) => {
       saveToResults(results[0].rows, "address");
@@ -67,35 +67,35 @@ app.post("/add_name", (req, res) => {
   const name = req.body.name;
   db.addName(name)
     .then((data) => {
-      res.status(200).send("Name added!");
+      res.status(200).send(data.rows[0]);
     })
     .catch((err) => res.status(400).send(err));
 });
 
-app.post("/add_email_by_name", (req, res) => {
-  const name = req.body.name;
+app.post("/add_email_by_id", (req, res) => {
+  const ID = req.query.ID;
   const email = req.body.email;
-  db.addEmailByName(name, email)
+  db.addEmailByID(ID, email)
     .then((data) => {
       res.status(200).send("Email added!");
     })
     .catch((err) => res.status(400).send(err));
 });
 
-app.post("/add_phone_number_by_name", (req, res) => {
-  const name = req.body.name;
+app.post("/add_phone_number_by_id", (req, res) => {
+  const ID = req.query.ID;
   const number = req.body.number;
-  db.addPhoneNumberByName(name, number)
+  db.addPhoneNumberByID(ID, number)
     .then((data) => {
       res.status(200).send("Phone number added!");
     })
     .catch((err) => res.status(400).send(err));
 });
 
-app.post("/add_address_by_name", (req, res) => {
-  const name = req.body.name;
+app.post("/add_address_by_id", (req, res) => {
+  const ID = req.query.ID;
   const address = req.body.address;
-  db.addAddressByName(name, address)
+  db.addAddressByID(ID, address)
     .then((data) => {
       res.status(200).send("Address added!");
     })
