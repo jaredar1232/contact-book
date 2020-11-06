@@ -6,11 +6,12 @@ interface Props {
 
 export const AddButton: React.FC<Props> = (props) => {
   return (
-    <div className="add-button">
-      <button onClick={() => props.setDisplayAddModal(true)}>
-        Add Contact
-      </button>
-    </div>
+    <button
+      className="add-button"
+      onClick={() => props.setDisplayAddModal(true)}
+    >
+      Add Contact
+    </button>
   );
 };
 

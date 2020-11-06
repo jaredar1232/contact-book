@@ -68,37 +68,40 @@ export const App: React.FC = () => {
   }, [inputText]);
 
   return (
-    <div>
-      <div className="header-text">The Compendium</div>
-      <SearchBar inputText={inputText} setInputText={setInputText} />
-      <AddButton setDisplayAddModal={setDisplayAddModal} />
-      <br></br>
-      <NamesList
-        filteredListOfNames={filteredListOfNames}
-        nameClickHandler={nameClickHandler}
-      />
-      <br></br>
-      <AddModal
-        displayAddModal={displayAddModal}
-        getAllNames={getAllNames}
-        setDisplayAddModal={setDisplayAddModal}
-      />
-      <br></br>
+    <div className="page-container">
+      <header className="header">The Compendium</header>
+      <div className="content-wrap">
+        <div className="search-and-add">
+          <SearchBar inputText={inputText} setInputText={setInputText} />
+          <AddButton setDisplayAddModal={setDisplayAddModal} />
+        </div>
+        <br></br>
+        <NamesList
+          filteredListOfNames={filteredListOfNames}
+          nameClickHandler={nameClickHandler}
+        />
+        <br></br>
+        <AddModal
+          displayAddModal={displayAddModal}
+          getAllNames={getAllNames}
+          setDisplayAddModal={setDisplayAddModal}
+        />
+        <br></br>
 
-      <ContactModal
-        selectedName={selectedName}
-        setSelectedName={setSelectedName}
-        selectedID={selectedID}
-        displayInfoModal={displayInfoModal}
-        setDisplayInfoModal={setDisplayInfoModal}
-        getAllNames={getAllNames}
-        setSelectedID={setSelectedID}
-      />
-
-      <div className="footer-text">
+        <ContactModal
+          selectedName={selectedName}
+          setSelectedName={setSelectedName}
+          selectedID={selectedID}
+          displayInfoModal={displayInfoModal}
+          setDisplayInfoModal={setDisplayInfoModal}
+          getAllNames={getAllNames}
+          setSelectedID={setSelectedID}
+        />
+      </div>
+      <footer className="footer">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
         Reserved
-      </div>
+      </footer>
     </div>
   );
 };

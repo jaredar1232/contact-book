@@ -81,19 +81,23 @@ export const DataList: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {editing ? (
-        <input
-          value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
-        />
-      ) : (
-        <div>{props.dataForContact}</div>
-      )}
+      <div className="datalist-container">
+        {editing ? (
+          <input
+            className="datalist-input"
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+          />
+        ) : (
+          <div>{props.dataForContact}</div>
+        )}
+      </div>
 
-      <button onClick={() => editOnClickHandler()}>
+      <button className="datalist-button" onClick={() => editOnClickHandler()}>
         {editing ? "Save" : "Edit"}
       </button>
       <button
+        className="datalist-button"
         onClick={() =>
           deleteDataFieldQuery(props.dataType, props.dataForContact)
         }

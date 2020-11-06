@@ -61,40 +61,72 @@ export const ContactModal: React.FC<Props> = (props) => {
       className="contact-modal"
       style={{ display: props.displayInfoModal ? "block" : "none" }}
     >
-      <div onClick={() => props.setDisplayInfoModal(!props.displayInfoModal)}>
-        Exit
-      </div>
-      <div>CONTACT MODAL</div>
-      <div>{props.selectedName}</div>
-      {addressArray.map((aAddress) => (
-        <DataList
-          dataForContact={aAddress}
-          key={aAddress}
-          dataType="Address"
-          getInfoByID={getInfoByID}
-          selectedID={props.selectedID}
-        />
-      ))}
-      {emailArray.map((aEmail) => (
-        <DataList
-          dataForContact={aEmail}
-          key={aEmail}
-          dataType="Email"
-          getInfoByID={getInfoByID}
-          selectedID={props.selectedID}
-        />
-      ))}
-      {numberArray.map((aNumber) => (
-        <DataList
-          dataForContact={aNumber}
-          key={aNumber}
-          dataType="Number"
-          getInfoByID={getInfoByID}
-          selectedID={props.selectedID}
-        />
-      ))}
-      <div onClick={() => deleteContactByID(props.selectedID)}>
-        DELETE CONTACT
+      <div className="contact-modal-content">
+        <div
+          className="contact-modal-exit"
+          onClick={() => props.setDisplayInfoModal(!props.displayInfoModal)}
+        >
+          X
+        </div>
+        <div className="contact-modal-header">Contact Info</div>
+        <div className="contact-modal-name">{props.selectedName}</div>
+
+        <div className="contact-modal-secondary-data">
+          <div className="contact-modal-datalist">
+            {addressArray.length === 0 ? (
+              <div>No addresses added</div>
+            ) : (
+              addressArray.map((aAddress) => (
+                <DataList
+                  dataForContact={aAddress}
+                  key={aAddress}
+                  dataType="Address"
+                  getInfoByID={getInfoByID}
+                  selectedID={props.selectedID}
+                />
+              ))
+            )}
+          </div>
+
+          <div className="contact-modal-datalist">
+            {emailArray.length === 0 ? (
+              <div>No emails added</div>
+            ) : (
+              emailArray.map((aEmail) => (
+                <DataList
+                  dataForContact={aEmail}
+                  key={aEmail}
+                  dataType="Email"
+                  getInfoByID={getInfoByID}
+                  selectedID={props.selectedID}
+                />
+              ))
+            )}
+          </div>
+
+          <div className="contact-modal-datalist">
+            {numberArray.length === 0 ? (
+              <div>No emails added</div>
+            ) : (
+              numberArray.map((aNumber) => (
+                <DataList
+                  dataForContact={aNumber}
+                  key={aNumber}
+                  dataType="Number"
+                  getInfoByID={getInfoByID}
+                  selectedID={props.selectedID}
+                />
+              ))
+            )}
+          </div>
+        </div>
+
+        <button
+          className="contact-modal-delete-all-button"
+          onClick={() => deleteContactByID(props.selectedID)}
+        >
+          Delete Contact
+        </button>
       </div>
     </div>
   );

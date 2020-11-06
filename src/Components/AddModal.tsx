@@ -108,81 +108,102 @@ export const AddModal: React.FC<Props> = (props) => {
       className="add-modal"
       style={{ display: props.displayAddModal ? "block" : "none" }}
     >
-      <div onClick={() => props.setDisplayAddModal(!props.displayAddModal)}>
-        Exit
-      </div>
-
       <div>
-        <div>ADD MODAL</div>
-        <div>
-          <input
-            placeholder="Name"
-            value={nameVal}
-            onChange={(event) => setNameVal(event.target.value)}
-          ></input>
-        </div>
+        <div className="add-modal-content ">
+          <div
+            className="add-modal-exit"
+            onClick={() => props.setDisplayAddModal(!props.displayAddModal)}
+          >
+            X
+          </div>
+          <div className="add-modal-header">Add Contact</div>
+          <div className="add-modal-name-container">
+            <input
+              className="add-modal-inputs"
+              placeholder="Name"
+              value={nameVal}
+              onChange={(event) => setNameVal(event.target.value)}
+            ></input>
+          </div>
 
-        <div>
-          <input
-            placeholder="Phone Number"
-            value={numberVal1}
-            onChange={(event) => setNumberVal1(event.target.value)}
-          />
-          <input
-            placeholder="Address"
-            value={addressVal1}
-            onChange={(event) => setAddressVal1(event.target.value)}
-          />
-          <input
-            placeholder="Email"
-            value={emailVal1}
-            onChange={(event) => setEmailVal1(event.target.value)}
-          />
-        </div>
+          <div className="add-modal-secondary-inputs">
+            <div className="add-modal-secondary-inputs-sub">
+              <input
+                className="add-modal-inputs"
+                placeholder="Phone Number"
+                value={numberVal1}
+                onChange={(event) => setNumberVal1(event.target.value)}
+              />
+              <input
+                className="add-modal-inputs"
+                placeholder="Address"
+                value={addressVal1}
+                onChange={(event) => setAddressVal1(event.target.value)}
+              />
+              <input
+                className="add-modal-inputs"
+                placeholder="Email"
+                value={emailVal1}
+                onChange={(event) => setEmailVal1(event.target.value)}
+              />
+            </div>
 
-        <div>
-          <input
-            placeholder="Alt Phone Number"
-            value={numberVal2}
-            onChange={(event) => setNumberVal2(event.target.value)}
-          />
-          <input
-            placeholder="Alt Address"
-            value={addressVal2}
-            onChange={(event) => setAddressVal2(event.target.value)}
-          />
-          <input
-            placeholder="Alt Email"
-            value={emailVal2}
-            onChange={(event) => setEmailVal2(event.target.value)}
-          />
-        </div>
+            <div>
+              <div className="add-modal-secondary-inputs-sub">
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Phone Number"
+                  value={numberVal2}
+                  onChange={(event) => setNumberVal2(event.target.value)}
+                />
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Address"
+                  value={addressVal2}
+                  onChange={(event) => setAddressVal2(event.target.value)}
+                />
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Email"
+                  value={emailVal2}
+                  onChange={(event) => setEmailVal2(event.target.value)}
+                />
+              </div>
+            </div>
 
-        <div>
-          <input
-            placeholder="Alt Phone Number"
-            value={numberVal3}
-            onChange={(event) => setNumberVal3(event.target.value)}
-          />
-          <input
-            placeholder="Alt Address"
-            value={addressVal3}
-            onChange={(event) => setAddressVal3(event.target.value)}
-          />
-          <input
-            placeholder="Alt Email"
-            value={emailVal3}
-            onChange={(event) => setEmailVal3(event.target.value)}
-          />
-        </div>
+            <div>
+              <div className="add-modal-secondary-inputs-sub">
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Phone Number"
+                  value={numberVal3}
+                  onChange={(event) => setNumberVal3(event.target.value)}
+                />
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Address"
+                  value={addressVal3}
+                  onChange={(event) => setAddressVal3(event.target.value)}
+                />
+                <input
+                  className="add-modal-inputs"
+                  placeholder="Alt Email"
+                  value={emailVal3}
+                  onChange={(event) => setEmailVal3(event.target.value)}
+                />
+              </div>
+            </div>
+          </div>
 
-        <button
-          onClick={() => {
-            submitDataHandler();
-          }}
-        >
-          Save Contact
-        </button>
+          <button
+            className="add-modal-save-button"
+            onClick={() => {
+              submitDataHandler();
+            }}
+          >
+            Save Contact
+          </button>
+        </div>
       </div>
     </div>
   );

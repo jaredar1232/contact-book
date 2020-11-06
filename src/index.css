@@ -1,13 +1,238 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* margin: 0; */
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: rgb(233, 233, 233);
+}
+
+.content-wrap {
+  padding-top: 19rem;
+  padding-bottom: 2.5rem;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  padding-top: 10rem;
+  font-size: 6rem;
+  text-align: center;
+  height: 6rem;
+  text-align: center;
+  width: 100%;
+  color: white;
+  text-shadow: 3px 3px 3px rgb(158, 158, 158);
+}
+
+.search-and-add {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.searchbar-container {
+  display: inline-block;
+  text-align: center;
+  padding: 0rem;
+  text-align: center;
+  width: auto;
+}
+
+.searchbar-input {
+  text-align: center;
+}
+
+.add-button {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.names-list {
+  border-radius: 10px;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgb(235, 235, 235);
+}
+
+.a-name {
+  border-radius: 10px;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  width: 60%;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.add-modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+.add-modal-content {
+  background-color: #e6e6e6;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+}
+
+.add-modal-exit {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-modal-header {
+  text-align: center;
+  font-family: papyrus;
+  font-weight: 700;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.add-modal-name-container {
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  width: 25%;
+  margin: 0px auto;
+}
+
+.add-modal-inputs {
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+}
+
+.add-modal-secondary-inputs {
+  text-align: center;
+}
+
+.add-modal-secondary-inputs-sub {
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  width: 80%;
+  margin: 16px auto;
+  text-align: center;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+}
+
+.add-modal-save-button {
+  cursor: pointer;
+}
+
+.contact-modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+.contact-modal-content {
+  background-color: #e6e6e6;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+}
+
+.contact-modal-exit {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.contact-modal-header {
+  text-align: center;
+  font-family: papyrus;
+  font-weight: 700;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.contact-modal-name {
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  width: 70%;
+  font-size: 1.5rem;
+  margin: 16px auto;
+  text-align: center;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+}
+
+.contact-modal-delete-all-button {
+  cursor: pointer;
+  display: block;
+  margin-top: 10px;
+}
+
+.contact-modal-secondary-data {
+  text-align: center;
+}
+
+.contact-modal-datalist {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  width: auto;
+  font-size: 1.2rem;
+  margin: 16px 1rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+}
+
+.datalist-input {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  width: auto;
+  padding: 2px;
+  font-size: 1rem;
+}
+
+.datalist-button {
+  cursor: pointer;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  text-align: center;
+  color: grey;
 }
