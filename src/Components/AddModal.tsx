@@ -62,12 +62,7 @@ export const AddModal: React.FC<Props> = (props) => {
           name: nameVal,
         })
         .then(async (response) => {
-          // const delayer = async () => setReturnID(response.data.name_id);
-          // await delayer();
-          // console.log(response.data.name_id);
-          // console.log(returnID);
           setReturnID(response.data.name_id);
-          // return response.data.name_id;
         })
         .catch((err) => console.log(err));
     }
@@ -89,7 +84,6 @@ export const AddModal: React.FC<Props> = (props) => {
       emailsPath = "/add_email_by_id?ID=";
 
     // AWAITS USED TO PREVENT A TIMING BUG ON THE FONTEND
-
     await multiQuery(arrayOfNumbers, numbersPath, "number");
     await multiQuery(arrayOfAddresses, addressesPath, "address");
     await multiQuery(arrayOfEmails, emailsPath, "email");
