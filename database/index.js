@@ -2,12 +2,12 @@ const { Pool } = require("pg");
 
 colors = require("colors");
 
-var db = new Pool({
-  user: "postgres",
-  password: "postgres",
-  host: "localhost",
-  port: 5432,
-  database: "postgres",
+let db = new Pool({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
 });
 
 db.on("error", (err, client) => {
