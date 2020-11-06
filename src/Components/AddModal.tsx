@@ -76,6 +76,7 @@ export const AddModal: React.FC<Props> = (props) => {
   const submitDataHandler = async () => {
     // ADDS NAME TO DATABASE BEFORE ADDING RELATED DATA
     await addNameQuery();
+    props.setDisplayAddModal(false);
   };
 
   const followUpSubmit = async () => {
@@ -95,7 +96,6 @@ export const AddModal: React.FC<Props> = (props) => {
 
     await clearForm();
     props.getAllNames();
-    props.setDisplayAddModal(!props.displayAddModal);
   };
 
   // WAITS FOR ID TO BE RETURNED FROM A NAME SUBMISSION TO DATABASE BEFORE ADDING ASSOCIATED DATA
@@ -127,17 +127,17 @@ export const AddModal: React.FC<Props> = (props) => {
             placeholder="Phone Number"
             value={numberVal1}
             onChange={(event) => setNumberVal1(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Address"
             value={addressVal1}
             onChange={(event) => setAddressVal1(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Email"
             value={emailVal1}
             onChange={(event) => setEmailVal1(event.target.value)}
-          ></input>
+          />
         </div>
 
         <div>
@@ -145,17 +145,17 @@ export const AddModal: React.FC<Props> = (props) => {
             placeholder="Alt Phone Number"
             value={numberVal2}
             onChange={(event) => setNumberVal2(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Alt Address"
             value={addressVal2}
             onChange={(event) => setAddressVal2(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Alt Email"
             value={emailVal2}
             onChange={(event) => setEmailVal2(event.target.value)}
-          ></input>
+          />
         </div>
 
         <div>
@@ -163,17 +163,17 @@ export const AddModal: React.FC<Props> = (props) => {
             placeholder="Alt Phone Number"
             value={numberVal3}
             onChange={(event) => setNumberVal3(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Alt Address"
             value={addressVal3}
             onChange={(event) => setAddressVal3(event.target.value)}
-          ></input>
+          />
           <input
             placeholder="Alt Email"
             value={emailVal3}
             onChange={(event) => setEmailVal3(event.target.value)}
-          ></input>
+          />
         </div>
 
         <button

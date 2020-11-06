@@ -12,11 +12,12 @@ export const NamesList: React.FC<Props> = (props) => {
     <div className="names-list">
       <div>
         {props.filteredListOfNames.map((aNameAndID) => {
+          const name_id = aNameAndID.name_id;
           return (
             <AName
               name={aNameAndID.name}
-              ID={aNameAndID.name_id}
-              key={aNameAndID.name_id}
+              ID={name_id}
+              key={name_id}
               nameClickHandler={props.nameClickHandler}
             />
           );

@@ -71,10 +71,7 @@ export const App: React.FC = () => {
     <div>
       <div className="header-text">The Compendium</div>
       <SearchBar inputText={inputText} setInputText={setInputText} />
-      <AddButton
-        displayAddModal={displayAddModal}
-        setDisplayAddModal={setDisplayAddModal}
-      />
+      <AddButton setDisplayAddModal={setDisplayAddModal} />
       <br></br>
       <NamesList
         filteredListOfNames={filteredListOfNames}

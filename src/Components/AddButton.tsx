@@ -1,14 +1,13 @@
 import React from "react";
 
 interface Props {
-  displayAddModal: boolean;
   setDisplayAddModal: (displayAddModal: boolean) => void;
 }
 
 export const AddButton: React.FC<Props> = (props) => {
   return (
     <div className="add-button">
-      <button onClick={() => props.setDisplayAddModal(!props.displayAddModal)}>
+      <button onClick={() => props.setDisplayAddModal(true)}>
         Add Contact
       </button>
     </div>

@@ -167,9 +167,9 @@ app.post("/delete_address", (req, res) => {
 });
 
 // deletes an entire contact (including name/email/addy/phone#)
-app.post("/delete_contact_by_name", (req, res) => {
-  const name = req.body.name;
-  db.deleteContactByName(name)
+app.post("/delete_contact_by_id", (req, res) => {
+  const ID = req.query.ID;
+  db.deleteContactByID(ID)
     .then((data) => {
       res.status(200).send("Contact deleted!");
     })

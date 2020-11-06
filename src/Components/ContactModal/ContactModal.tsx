@@ -27,9 +27,9 @@ export const ContactModal: React.FC<Props> = (props) => {
   //////////////////////////////
   // QUERIES
   //////////////////////////////
-  const deleteContactByName = (nameToDelete: string) => {
+  const deleteContactByID = (ID: number) => {
     axios
-      .post("/delete_contact_by_name", { name: `${nameToDelete}` })
+      .post(`/delete_contact_by_id?ID=${ID}`)
       .then(() => {
         props.getAllNames();
         props.setSelectedID(-1);
@@ -93,7 +93,7 @@ export const ContactModal: React.FC<Props> = (props) => {
           selectedID={props.selectedID}
         />
       ))}
-      <div onClick={() => deleteContactByName(props.selectedName)}>
+      <div onClick={() => deleteContactByID(props.selectedID)}>
         DELETE CONTACT
       </div>
     </div>

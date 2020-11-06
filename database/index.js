@@ -1,6 +1,15 @@
 const { Pool } = require("pg");
+require("dotenv").config();
 
 colors = require("colors");
+
+// let db = new Pool({
+//   user: "postgres",
+//   password: "postgres",
+//   host: "localhost",
+//   port: 5432,
+//   database: "postgres",
+// });
 
 let db = new Pool({
   user: process.env.DB_USER,

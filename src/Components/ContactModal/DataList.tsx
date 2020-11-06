@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 interface Props {
@@ -9,7 +9,10 @@ interface Props {
 }
 
 // DATA LIST COMPONENT: RENDERES A PIECE OF INFO FROM AN ARRAY OF DATA AND PROVIDES DELETE ABILITIES
-export const dataList: React.FC<Props> = (props) => {
+export const DataList: React.FC<Props> = (props) => {
+  const [editing, setEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(props.dataForContact);
+
   // SETS QUERY PATH BASED ON WHAT DATA COMPONENT IS RENDERING
   const setPath = (type: string) => {
     if (type === "Address") {
@@ -21,16 +24,14 @@ export const dataList: React.FC<Props> = (props) => {
     }
   };
 
-  const deleteDataField = (type: string, dataToBeDeleted: string) => {
+  const deleteDataFieldQuery = (type: string, dataToBeDeleted: string) => {
     let path = setPath(type) || "";
     let dataKey = type.toLowerCase();
-
     axios
       .post(path, {
         [dataKey]: `${dataToBeDeleted}`,
       })
       .then((response) => {
-        console.log(response);
         props.getInfoByID(props.selectedID);
       })
       .catch((error) => {
@@ -38,14 +39,67 @@ export const dataList: React.FC<Props> = (props) => {
       });
   };
 
+  const editDataQuery = () => {
+    let path = "",
+      oldValue = "",
+      newValue = "";
+
+    if (props.dataType === "Address") {
+      path = "/update_address";
+      oldValue = "oldAddress";
+      newValue = "newAddress";
+    } else if (props.dataType === "Email") {
+      path = "/update_email";
+      oldValue = "oldEmail";
+      newValue = "newEmail";
+    } else if (props.dataType === "Number") {
+      path = "/update_phone_number";
+      oldValue = "oldNumber";
+      newValue = "newNumber";
+    }
+
+    axios
+      .post(path, {
+        [oldValue]: `${props.dataForContact}`,
+        [newValue]: `${inputValue}`,
+      })
+      .then((response) => {
+        props.getInfoByID(props.selectedID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const editOnClickHandler = () => {
+    if (editing) {
+      editDataQuery();
+    }
+
+    setEditing(!editing);
+  };
+
   return (
     <div>
-      <div>{props.dataForContact}</div>
+      {editing ? (
+        <input
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
+        />
+      ) : (
+        <div>{props.dataForContact}</div>
+      )}
+
+      <button onClick={() => editOnClickHandler()}>
+        {editing ? "Save" : "Edit"}
+      </button>
       <button
-        onClick={() => deleteDataField(props.dataType, props.dataForContact)}
+        onClick={() =>
+          deleteDataFieldQuery(props.dataType, props.dataForContact)
+        }
       >{`Delete ${props.dataType}`}</button>
     </div>
   );
 };
 
-export default dataList;
+export default DataList;

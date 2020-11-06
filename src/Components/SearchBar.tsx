@@ -13,7 +13,7 @@ export const SearchBar: React.FC<Props> = (props) => {
         value={props.inputText}
         onChange={(event) => props.setInputText(event.target.value)}
         placeholder="Search a name"
-      ></input>
+      />
     </div>
   );
 };

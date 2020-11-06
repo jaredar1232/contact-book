@@ -3,12 +3,14 @@ const db = require("./index.js");
 // ALL QUERRIES:
 // get all names
 //
-// get all info associated with name
+// get address by id
+// get number by id
+// get email by id
 //
 // add name
-// add email by name
-// add phone number by name
-// add address by name
+// add email by id
+// add phone number by id
+// add address by id
 //
 // update email
 // update phone number
@@ -18,7 +20,7 @@ const db = require("./index.js");
 // delete phone number
 // delete address
 //
-// delete all info associated with name
+// delete all info associated with id
 
 module.exports = {
   getAllNames: () => {
@@ -81,8 +83,8 @@ module.exports = {
       `DELETE FROM addresses WHERE addresses.address = '${address}';`
     );
   },
-  deleteContactByName: (name) => {
-    return db.query(`DELETE FROM people WHERE people.name = '${name}';`);
+  deleteContactByID: (id) => {
+    return db.query(`DELETE FROM people WHERE people.name_id = '${id}';`);
   },
 };
 
