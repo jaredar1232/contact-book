@@ -93,11 +93,14 @@ export const DataList: React.FC<Props> = (props) => {
         )}
       </div>
 
-      <button className="datalist-button" onClick={() => editOnClickHandler()}>
+      <button
+        className="datalist-button button"
+        onClick={() => editOnClickHandler()}
+      >
         {editing ? "Save" : "Edit"}
       </button>
       <button
-        className="datalist-button"
+        className="datalist-button button"
         onClick={() =>
           deleteDataFieldQuery(props.dataType, props.dataForContact)
         }

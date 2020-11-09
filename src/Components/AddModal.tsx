@@ -105,7 +105,7 @@ export const AddModal: React.FC<Props> = (props) => {
       <div>
         <div className="add-modal-content ">
           <div
-            className="add-modal-exit"
+            className="exit-button"
             onClick={() => props.setDisplayAddModal(!props.displayAddModal)}
           >
             X
@@ -190,7 +190,7 @@ export const AddModal: React.FC<Props> = (props) => {
           </div>
 
           <button
-            className="add-modal-save-button"
+            className="button"
             onClick={() => {
               submitDataHandler();
             }}

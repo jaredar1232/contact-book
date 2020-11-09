@@ -1,5 +1,5 @@
 body {
-  /* margin: 0; */
+  margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif; */
@@ -15,25 +15,30 @@ code {
 .page-container {
   position: relative;
   min-height: 100vh;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(217, 221, 224);
 }
 
 .content-wrap {
-  padding-top: 19rem;
-  padding-bottom: 2.5rem;
+  padding-top: 400px;
+  padding-bottom: 50px;
 }
 
 .header {
   position: absolute;
   top: 0;
-  padding-top: 10rem;
-  font-size: 6rem;
+  padding-top: 250px;
+  font-size: 100px;
   text-align: center;
-  height: 6rem;
   text-align: center;
   width: 100%;
   color: white;
   text-shadow: 3px 3px 3px rgb(158, 158, 158);
+}
+
+@media (max-width: 750px) {
+  .header {
+    font-size: 65px;
+  }
 }
 
 .search-and-add {
@@ -45,38 +50,81 @@ code {
 .searchbar-container {
   display: inline-block;
   text-align: center;
-  padding: 0rem;
+  padding: 0;
   text-align: center;
   width: auto;
 }
 
 .searchbar-input {
   text-align: center;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 2.5px 25px 2.5px 25px;
+}
+
+.button:hover,
+.button:focus {
+  box-shadow: 2px 3px 10px rgb(255, 255, 255), -2px -5px 10px rgb(255, 255, 255);
+  transition: 0.4s;
+}
+
+.button {
+  display: inline-block;
+  cursor: pointer;
+  padding: 6px;
+  background-color: rgb(217, 221, 224);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 3px 5px rgb(185, 185, 185), -2px -3px 5px rgb(255, 255, 255);
+  font-size: 16px;
 }
 
 .add-button {
-  display: inline-block;
-  cursor: pointer;
+  margin: 0 0 0 16px;
 }
 
 .names-list {
   border-radius: 10px;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  box-shadow: 2px 5px 15px rgb(185, 185, 185), -2px -5px 15px rgb(255, 255, 255);
   width: 30%;
-  margin: 0 auto;
+  margin: 16px auto 16px auto;
   text-align: center;
-  padding: 1rem;
-  background-color: rgb(235, 235, 235);
+  padding: 16px;
+  background-color: rgb(217, 221, 224);
+}
+
+@media (max-width: 750px) {
+  .names-list {
+    width: 70%;
+  }
 }
 
 .a-name {
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
   width: 60%;
-  margin: 1rem auto;
+  margin: 16px auto;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 24px;
   cursor: pointer;
+  padding: 0 5px;
+}
+
+.a-name:hover,
+.a-name:focus {
+  box-shadow: 2px 3px 10px rgb(255, 255, 255), -2px -5px 10px rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .add-modal {
@@ -89,23 +137,40 @@ code {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+  animation: fadeIn 0.5s;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .add-modal-content {
-  background-color: #e6e6e6;
+  background-color: rgb(217, 221, 224);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 50%; /* Could be more or less, depending on screen size */
   border-radius: 10px;
+  animation: popup 0.5s;
 }
 
-.add-modal-exit {
+.exit-button {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.exit-button:hover,
+.exit-button:focus {
+  transition: 0.2s;
+  color: black;
 }
 
 .add-modal-header {
@@ -117,17 +182,19 @@ code {
 }
 
 .add-modal-name-container {
+  background-color: rgb(217, 221, 224);
   text-align: center;
   border-radius: 10px;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
-  width: 25%;
+  box-shadow: 2px 5px 10px rgb(185, 185, 185), -2px -5px 10px rgb(255, 255, 255);
+  width: 70%;
   margin: 0px auto;
 }
 
 .add-modal-inputs {
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   text-align: center;
   margin: 5px;
+  font-size: 16px;
 }
 
 .add-modal-secondary-inputs {
@@ -136,15 +203,11 @@ code {
 
 .add-modal-secondary-inputs-sub {
   border-radius: 10px;
-  background-color: rgb(233, 233, 233);
-  width: 80%;
-  margin: 16px auto;
+  background-color: rgb(217, 221, 224);
+  width: 90%;
+  margin: 1.5rem auto;
   text-align: center;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
-}
-
-.add-modal-save-button {
-  cursor: pointer;
+  box-shadow: 2px 5px 10px rgb(185, 185, 185), -2px -5px 10px rgb(255, 255, 255);
 }
 
 .contact-modal {
@@ -157,15 +220,17 @@ code {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+  animation: fadeIn 0.5s;
 }
 
 .contact-modal-content {
-  background-color: #e6e6e6;
+  background-color: rgb(217, 221, 224);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 70%; /* Could be more or less, depending on screen size */
   border-radius: 10px;
+  animation: popup 0.5s;
 }
 
 .contact-modal-exit {
@@ -186,9 +251,9 @@ code {
 
 .contact-modal-name {
   border-radius: 10px;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(217, 221, 224);
   width: 70%;
-  font-size: 1.5rem;
+  font-size: 24px;
   margin: 16px auto;
   text-align: center;
   box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
@@ -207,11 +272,11 @@ code {
 .contact-modal-datalist {
   display: inline-block;
   border-radius: 10px;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(217, 221, 224);
   width: auto;
   font-size: 1.2rem;
-  margin: 16px 1rem;
-  padding: 1rem;
+  margin: 16px 16px;
+  padding: 16px;
   text-align: center;
   box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
 }
@@ -222,11 +287,14 @@ code {
   margin: 0 auto;
   width: auto;
   padding: 2px;
-  font-size: 1rem;
+  font-size: 16px;
+  border: 1px solid grey;
+  border-radius: 5px;
 }
 
 .datalist-button {
   cursor: pointer;
+  margin: 7px;
 }
 
 .footer {

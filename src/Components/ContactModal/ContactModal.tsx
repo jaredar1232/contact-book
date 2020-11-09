@@ -63,7 +63,7 @@ export const ContactModal: React.FC<Props> = (props) => {
     >
       <div className="contact-modal-content">
         <div
-          className="contact-modal-exit"
+          className="exit-button"
           onClick={() => props.setDisplayInfoModal(!props.displayInfoModal)}
         >
           X
@@ -122,7 +122,7 @@ export const ContactModal: React.FC<Props> = (props) => {
         </div>
 
         <button
-          className="contact-modal-delete-all-button"
+          className="contact-modal-delete-all-button button"
           onClick={() => deleteContactByID(props.selectedID)}
         >
           Delete Contact

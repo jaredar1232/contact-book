@@ -75,18 +75,17 @@ export const App: React.FC = () => {
           <SearchBar inputText={inputText} setInputText={setInputText} />
           <AddButton setDisplayAddModal={setDisplayAddModal} />
         </div>
-        <br></br>
+
         <NamesList
           filteredListOfNames={filteredListOfNames}
           nameClickHandler={nameClickHandler}
         />
-        <br></br>
+
         <AddModal
           displayAddModal={displayAddModal}
           getAllNames={getAllNames}
           setDisplayAddModal={setDisplayAddModal}
         />
-        <br></br>
 
         <ContactModal
           selectedName={selectedName}
