@@ -338,7 +338,13 @@ code {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;
+  height: 40px;
   text-align: center;
   color: grey;
+}
+
+@media (max-width: 750px) {
+  .footer {
+    font-size: 14px;
+  }
 }
