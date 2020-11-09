@@ -193,7 +193,7 @@ code {
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
+  width: 75%; /* Could be more or less, depending on screen size */
   border-radius: 10px;
   animation: popup 0.5s;
 }
@@ -231,12 +231,12 @@ code {
   text-align: center;
   border-radius: 10px;
   box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #ffffff;
-  width: 70%;
+  width: 75%;
   margin: 0px auto;
 }
 
 .add-modal-inputs {
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px 5px 20px;
   text-align: center;
   margin: 5px;
   font-size: 16px;
