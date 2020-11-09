@@ -15,7 +15,7 @@ code {
 .page-container {
   position: relative;
   min-height: 100vh;
-  background-color: rgb(217, 221, 224);
+  background-color: #ecf0f3;
 }
 
 .content-wrap {
@@ -26,13 +26,13 @@ code {
 .header {
   position: absolute;
   top: 0;
-  padding-top: 250px;
+  padding-top: 200px;
   font-size: 100px;
   text-align: center;
   text-align: center;
   width: 100%;
   color: white;
-  text-shadow: 3px 3px 3px rgb(158, 158, 158);
+  text-shadow: 4px 4px 6px rgb(139, 139, 139);
 }
 
 @media (max-width: 750px) {
@@ -65,19 +65,21 @@ code {
 
 .button:hover,
 .button:focus {
-  box-shadow: 2px 3px 10px rgb(255, 255, 255), -2px -5px 10px rgb(255, 255, 255);
-  transition: 0.4s;
+  box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+  transform: translate(0px, 2px);
+  transition: 0.2s;
+  background: #e6e9ef;
 }
 
 .button {
   display: inline-block;
   cursor: pointer;
   padding: 6px;
-  background-color: rgb(217, 221, 224);
+  background: #e3e6ec;
   color: black;
   border: none;
   border-radius: 5px;
-  box-shadow: 2px 3px 5px rgb(185, 185, 185), -2px -3px 5px rgb(255, 255, 255);
+  box-shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
   font-size: 16px;
 }
 
@@ -86,13 +88,13 @@ code {
 }
 
 .names-list {
-  border-radius: 10px;
-  box-shadow: 2px 5px 15px rgb(185, 185, 185), -2px -5px 15px rgb(255, 255, 255);
+  border-radius: 30px;
+  box-shadow: 18px 18px 20px #d1d9e6, -18px -18px 20px #ffffff;
   width: 30%;
-  margin: 16px auto 16px auto;
+  margin: 40px auto 16px auto;
   text-align: center;
   padding: 16px;
-  background-color: rgb(217, 221, 224);
+  background: #eaedf3;
 }
 
 @media (max-width: 750px) {
@@ -103,18 +105,20 @@ code {
 
 .a-name {
   border-radius: 5px;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  box-shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
   width: 60%;
   margin: 16px auto;
   text-align: center;
   font-size: 24px;
   cursor: pointer;
   padding: 0 5px;
+  background: #e3e6ec;
 }
 
 .a-name:hover,
 .a-name:focus {
-  box-shadow: 2px 3px 10px rgb(255, 255, 255), -2px -5px 10px rgb(255, 255, 255);
+  box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+  transform: translate(0px, 2px);
   transition: 0.2s;
 }
 
@@ -150,7 +154,7 @@ code {
 }
 
 .add-modal-content {
-  background-color: rgb(217, 221, 224);
+  background-color: #ecf0f3;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
@@ -182,10 +186,10 @@ code {
 }
 
 .add-modal-name-container {
-  background-color: rgb(217, 221, 224);
+  background-color: #e3e6ec;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 2px 5px 10px rgb(185, 185, 185), -2px -5px 10px rgb(255, 255, 255);
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #ffffff;
   width: 70%;
   margin: 0px auto;
 }
@@ -195,6 +199,8 @@ code {
   text-align: center;
   margin: 5px;
   font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid grey;
 }
 
 .add-modal-secondary-inputs {
@@ -203,11 +209,11 @@ code {
 
 .add-modal-secondary-inputs-sub {
   border-radius: 10px;
-  background-color: rgb(217, 221, 224);
+  background-color: #e3e6ec;
   width: 90%;
   margin: 1.5rem auto;
   text-align: center;
-  box-shadow: 2px 5px 10px rgb(185, 185, 185), -2px -5px 10px rgb(255, 255, 255);
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #ffffff;
 }
 
 .contact-modal {
@@ -224,7 +230,7 @@ code {
 }
 
 .contact-modal-content {
-  background-color: rgb(217, 221, 224);
+  background-color: #ecf0f3;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
@@ -251,12 +257,12 @@ code {
 
 .contact-modal-name {
   border-radius: 10px;
-  background-color: rgb(217, 221, 224);
+  background: #e3e6ec;
   width: 70%;
   font-size: 24px;
   margin: 16px auto;
   text-align: center;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #ffffff;
 }
 
 .contact-modal-delete-all-button {
@@ -272,13 +278,13 @@ code {
 .contact-modal-datalist {
   display: inline-block;
   border-radius: 10px;
-  background-color: rgb(217, 221, 224);
+  background: #e3e6ec;
   width: auto;
   font-size: 1.2rem;
   margin: 16px 16px;
   padding: 16px;
   text-align: center;
-  box-shadow: 2px 5px 7px rgb(185, 185, 185), -2px -5px 7px rgb(255, 255, 255);
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #ffffff;
 }
 
 .datalist-input {
