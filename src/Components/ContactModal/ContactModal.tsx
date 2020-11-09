@@ -106,7 +106,7 @@ export const ContactModal: React.FC<Props> = (props) => {
 
           <div className="contact-modal-datalist">
             {numberArray.length === 0 ? (
-              <div>No emails added</div>
+              <div>No numbers added</div>
             ) : (
               numberArray.map((aNumber) => (
                 <DataList
