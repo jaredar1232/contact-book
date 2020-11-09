@@ -61,7 +61,7 @@ export const ContactModal: React.FC<Props> = (props) => {
       className="contact-modal"
       style={{ display: props.displayInfoModal ? "block" : "none" }}
     >
-      <div className="contact-modal-content">
+      <div className="modal-content">
         <div
           className="exit-button"
           onClick={() => props.setDisplayInfoModal(!props.displayInfoModal)}

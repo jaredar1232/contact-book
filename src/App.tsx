@@ -62,6 +62,14 @@ export const App: React.FC = () => {
     getAllNames();
   }, []);
 
+  useEffect(() => {
+    if (displayAddModal === true || displayInfoModal === true) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [displayInfoModal, displayAddModal]);
+
   // UPDATES listOfNames WHENEVER SOMEONE TYPES IN SEARCHBAR
   useEffect(() => {
     setFilteredListOfNames(filterListOfNames(listOfNamesAndIDs, inputText));

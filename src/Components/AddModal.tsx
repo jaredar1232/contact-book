@@ -103,7 +103,7 @@ export const AddModal: React.FC<Props> = (props) => {
       style={{ display: props.displayAddModal ? "block" : "none" }}
     >
       <div>
-        <div className="add-modal-content ">
+        <div className="modal-content ">
           <div
             className="exit-button"
             onClick={() => props.setDisplayAddModal(!props.displayAddModal)}
