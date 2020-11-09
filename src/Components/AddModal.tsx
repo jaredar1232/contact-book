@@ -45,7 +45,7 @@ export const AddModal: React.FC<Props> = (props) => {
   const checkForm = () => {
     const nameRegex = /^([a-zA-Z]+){1,25} ([a-zA-Z]+){1,25}$/;
     const numberRegex = /^([0-9]){10,15}$/;
-    const addressRegex = /^([a-zA-Z0-9 ]){5,100}$/;
+    const addressRegex = /^([a-zA-Z0-9\. ]){5,100}$/;
     const emailRegex = /^([a-zA-Z0-9]+@[a-zA-Z]+\.com){1}$/;
 
     const numberAlert =
