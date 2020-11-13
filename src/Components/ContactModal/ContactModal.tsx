@@ -12,6 +12,7 @@ interface Props {
   getAllNames: () => void;
 }
 
+// CONTACT MODAL COMPONENT: A MODAL POPUP THAT DISPLAYS INFO ASSOCIATED WITH THE CLICKED NAME
 export const ContactModal: React.FC<Props> = (props) => {
   const [addressArray, setAddressArray] = useState([""]);
   const [emailArray, setEmailArray] = useState([""]);
@@ -24,9 +25,7 @@ export const ContactModal: React.FC<Props> = (props) => {
     setNumberArray(dataToBeStored.number);
   };
 
-  //////////////////////////////
   // QUERIES
-  //////////////////////////////
   const deleteContactByID = (ID: number) => {
     axios
       .post(`/delete_contact_by_id?ID=${ID}`)

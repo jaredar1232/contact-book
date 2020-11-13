@@ -9,6 +9,7 @@ interface Props {
   setDisplayAddModal: (displayAddModal: boolean) => void;
 }
 
+// ADD MODAL COMPONENT: MODAL TO ALLOW ADDING OF A NEW CONTACT
 export const AddModal: React.FC<Props> = (props) => {
   const [nameVal, setNameVal] = useState("");
   const [returnID, setReturnID] = useState(-1);

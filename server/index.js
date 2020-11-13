@@ -32,10 +32,8 @@ app.get("/get_all_names_and_ids", (req, res) => {
 
 app.get("/get_info_by_id", async (req, res) => {
   const ID = req.query.ID;
-  // const name = req.body.name;
   const results = {};
-
-  // used to restructure the results from query
+  // USED TO RESTRUCTURE THE RESULTS FROM QUERY
   const saveToResults = (unfilteredData, name) => {
     let dataArray = [];
     for (let i = 0; i < unfilteredData.length; i++) {
@@ -44,7 +42,7 @@ app.get("/get_info_by_id", async (req, res) => {
     results[name] = dataArray;
   };
 
-  // had to hack together this tri query as JOIN and UNIONS weren't getting me what I needed
+  // JOIN and UNIONS weren't getting me what I needed, hence this
   Promise.all([
     db.getAddressByID(ID),
     db.getNumberByID(ID),
@@ -166,7 +164,7 @@ app.post("/delete_address", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-// deletes an entire contact (including name/email/addy/phone#)
+// DELETES AN ENTIRE CONTACT (INCLUDING NAME/EMAIL/ADDY/PHONE#)
 app.post("/delete_contact_by_id", (req, res) => {
   const ID = req.query.ID;
   db.deleteContactByID(ID)

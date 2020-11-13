@@ -4,6 +4,7 @@ interface Props {
   setDisplayAddModal: (displayAddModal: boolean) => void;
 }
 
+// ADD BUTTON COMPONENT: A BUTTON TO TRIGGER THE ADD CONTACT MODAL
 export const AddButton: React.FC<Props> = (props) => {
   return (
     <button

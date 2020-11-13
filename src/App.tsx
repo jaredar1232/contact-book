@@ -26,7 +26,7 @@ export const App: React.FC = () => {
     targetString: string
   ) => {
     const arrayOfFilteredNamesAndIDs = [];
-    // iterates over names, creating a filted list based on what is typed in the search bar
+    // ITERATES OVER NAMES, CREATING A FILTERED LIST BASED ON WHAT IS CURRENTLY TYPED IN THE SEARCH BAR
     for (let i = 0; i < arrayOfObjects.length; i++) {
       const lowerTargetString = targetString.toLowerCase();
       const lowerString = arrayOfObjects[i].name.toLowerCase();
@@ -35,10 +35,10 @@ export const App: React.FC = () => {
         arrayOfFilteredNamesAndIDs.push(arrayOfObjects[i]);
       }
     }
-    // this second set of names is used to prevent permanent removal from the names list when searching
     return arrayOfFilteredNamesAndIDs;
   };
 
+  // SETS VALUES WHEN ANAME COMPONENT IS CLICKED IN NAMELIST COMPONENT
   const nameClickHandler = (ID: number, name: string) => {
     setSelectedID(ID);
     setSelectedName(name);
@@ -51,6 +51,7 @@ export const App: React.FC = () => {
       .get("/get_all_names_and_ids")
       .then((result) => {
         setListOfNamesAndIDs(result.data);
+        // THERE ARE TWO LISTS OF NAMES IN ORDER TO ALLOW A USER TO DELETE WHAT THEYVE TYPED IN THE SEARCH BAR
         setFilteredListOfNames(filterListOfNames(result.data, ""));
       })
       .catch((err) => console.log(err));
@@ -62,6 +63,7 @@ export const App: React.FC = () => {
     getAllNames();
   }, []);
 
+  // PREVENTS SCROLLING WHEN A MODAL IS ENGAGED
   useEffect(() => {
     if (displayAddModal === true || displayInfoModal === true) {
       document.body.classList.add("no-scroll");
@@ -78,6 +80,7 @@ export const App: React.FC = () => {
   return (
     <div className="page-container">
       <header className="header">The Compendium</header>
+
       <div className="content-wrap">
         <div className="search-and-add">
           <SearchBar inputText={inputText} setInputText={setInputText} />
@@ -105,6 +108,7 @@ export const App: React.FC = () => {
           setSelectedID={setSelectedID}
         />
       </div>
+
       <footer className="footer">
         Copyright &copy; 2020, &nbsp; Jared Rothenberg. &nbsp; All Rights
         Reserved

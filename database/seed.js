@@ -1,7 +1,7 @@
 const colors = require("colors");
 const db = require("./index.js");
 
-// define setup db function
+// DEFINE setupDB function
 let setupDB = async () => {
   try {
     await db.query("DROP TABLE IF EXISTS people, mail, phone, addresses;");
@@ -39,5 +39,5 @@ let setupDB = async () => {
   }
 };
 
-// invoke setup function creating the database tables
+// INVIKE SETUP FUNCTION CREATING THE DATABASE TABLES
 setupDB();
