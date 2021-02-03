@@ -2,13 +2,20 @@
 
 The Compendium is a database for storing contacts and their related information. The design is inspired by minimalism and skeuomorphism.
 
+## Getting Started
+
+From the root directory:
+1. Run "npm install"
+2. Run "npm run seed"
+3. To start the app, either run "npm run build" then "npm start" OR run "npm run backend" and "npm run develop" in tandem
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the express server
+Starts the app connected to the build folter
 
 ### `npm run develop`
 
@@ -27,9 +34,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 ### `npm run seed`
 
 Seeds the database with appropriate tables
-
-## To start
-
-- run npm install and install dependencies
-- run the backend and development servers together. "npm run backend" & "npm run develop"
-- run npm seed to build the database tables
