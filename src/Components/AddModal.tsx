@@ -165,7 +165,7 @@ export const AddModal: React.FC<Props> = (props) => {
       className="add-modal"
       style={{ display: props.displayAddModal ? "block" : "none" }}
     >
-      <div>
+        <div className={props.displayAddModal? "modal-functionality-shown" : "modal-functionality-hiden"} onClick={() => props.setDisplayAddModal(!props.displayAddModal)}></div>
         <div className="modal-content ">
           <div
             className="exit-button"
@@ -261,7 +261,6 @@ export const AddModal: React.FC<Props> = (props) => {
             Save Contact
           </button>
         </div>
-      </div>
     </div>
   );
 };

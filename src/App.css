@@ -177,6 +177,25 @@ code {
   animation: fadeIn 0.5s;
 }
 
+.modal-functionality-shown {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  width: 100vw;
+  height: 100vh;
+  /** 
+  puts content over overlay
+  */
+  z-index: -1;
+}
+
+.modal-functionality-hidden {
+  display: none;
+}
+
 @keyframes popup {
   0% {
     transform: scale(0.1);
