@@ -19,7 +19,7 @@ Starts the app connected to the build folter
 
 ### `npm run develop`
 
-You will also need ro run "npm run develop" to start the development server
+You will also need to run "npm run develop" to start the development server
 
 ### `npm run backend`
 
