@@ -1,7 +1,7 @@
-const { Pool } = require("pg");
-require("dotenv").config();
+const { Pool } = require('pg');
+require('dotenv').config();
 
-colors = require("colors");
+colors = require('colors');
 
 let db = new Pool({
   user: process.env.DB_USER,
@@ -9,10 +9,13 @@ let db = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-db.on("error", (err, client) => {
-  console.error("Unexpected error on idle client", err);
+db.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err);
   process.exit(-1);
 });
 
@@ -20,7 +23,7 @@ db.connect((err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log("\n DATABASE: Connected! \n".blue);
+    console.log('\n DATABASE: Connected! \n'.blue);
   }
 });
 
